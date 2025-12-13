@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <motion.nav
@@ -10,10 +11,10 @@ export default function Navbar() {
       <h2 className="text-2xl text-white font-bold">Logo</h2>
       <ul className="flex items-center gap-6">
         <li className="font-semibold">
-          <a href="#">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li className="font-semibold">
-          <a href="#">About</a>
+          <Link to="/login">Login</Link>
         </li>
       </ul>
     </motion.nav>

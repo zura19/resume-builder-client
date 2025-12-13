@@ -1,25 +1,17 @@
-import Silk from "@/components/Silk";
-import Wrapper from "./components/shared/Wrapper";
-import Navbar from "./components/shared/Navbar";
-import GetStarted from "./pages/home/modules/GetStarted";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import Home from "./pages/home";
 
 function App() {
   return (
-    <div className=" h-screen  relative">
-      <Silk
-        speed={5}
-        scale={1}
-        color="#5227ff"
-        noiseIntensity={1.5}
-        rotation={0}
-      />
-      <div className="bg-black/10 absolute inset-0">
-        <Wrapper className="flex flex-col justify-between h-full">
-          <Navbar />
-          <GetStarted />
-        </Wrapper>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<p>about</p>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
