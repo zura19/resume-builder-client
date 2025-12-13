@@ -2,21 +2,21 @@ import FormButton from "@/components/shared/FormButton";
 import FormInput from "@/components/shared/FormInput";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-// import { motion } from "framer-motion";
 import AnimationProvider from "@/components/shared/AnimationProvider";
-import { loginSchema, type LoginSchema } from "@/lib/schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signupSchema, type SignupSchema } from "@/lib/schemas/signupSchema";
 
-export default function LoginForm() {
-  const form = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema),
+export default function SignupForm() {
+  const form = useForm<SignupSchema>({
+    resolver: zodResolver(signupSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
   });
 
-  async function onSubmit(vals: LoginSchema) {
+  async function onSubmit(vals: SignupSchema) {
     console.log(vals);
   }
 
@@ -28,6 +28,15 @@ export default function LoginForm() {
       >
         <AnimationProvider duration={0.7} initY={-40}>
           <FormInput
+            placeholder="JohnDoe"
+            name="name"
+            control={form.control}
+            className="h-12"
+          />
+        </AnimationProvider>
+
+        <AnimationProvider duration={0.7} initY={-40} delay={0.15}>
+          <FormInput
             placeholder="example@ex.com"
             name="email"
             control={form.control}
@@ -35,7 +44,7 @@ export default function LoginForm() {
           />
         </AnimationProvider>
 
-        <AnimationProvider duration={0.7} initY={-40} delay={0.15}>
+        <AnimationProvider duration={0.7} initY={-40} delay={0.25}>
           <FormInput
             placeholder="Password"
             name="password"
@@ -45,13 +54,13 @@ export default function LoginForm() {
           />
         </AnimationProvider>
 
-        <AnimationProvider duration={0.7} initY={-40} delay={0.25}>
+        <AnimationProvider duration={0.7} initY={-40} delay={0.35}>
           <FormButton
             className="w-full h-12 font-semibold text-lg"
             loading={false}
             type="submit"
           >
-            Log in
+            Sign Up
           </FormButton>
         </AnimationProvider>
       </form>

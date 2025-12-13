@@ -1,11 +1,11 @@
-import LoginForm from "./modules/LoginForm";
 import AuthTemplate from "@/components/shared/AuthTemplate";
+import SignupForm from "./modules/SignupForm";
 
-export default function Login() {
+export default function Signup() {
   return (
     <div className="space-y-12 flex w-full items-center justify-center h-full">
-      <AuthTemplate templateFor="login">
-        <LoginForm />
+      <AuthTemplate templateFor="register">
+        <SignupForm />
       </AuthTemplate>
     </div>
   );

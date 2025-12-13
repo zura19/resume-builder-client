@@ -14,7 +14,7 @@ function AnimationProvider(props: props) {
   const { children, initY, initX, endY, endX, duration, ease, delay } = props;
   return (
     <motion.div
-      initial={{ opacity: 0, y: initY ?? -40, x: initX ?? -40 }}
+      initial={{ opacity: 0, y: initY ?? 0, x: initX ?? 0 }}
       animate={{ opacity: 1, y: endY ?? 0, x: endX ?? 0 }}
       transition={{
         delay: delay ?? 0,

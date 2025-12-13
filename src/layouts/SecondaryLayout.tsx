@@ -1,7 +1,5 @@
 import DarkVeil from "@/components/DarkVeil";
-// import Navbar from "@/components/shared/Navbar";
 import Wrapper from "@/components/shared/Wrapper";
-// import Silk from "@/components/Silk";
 import { Outlet } from "react-router-dom";
 
 export default function SecondaryLayout() {
@@ -11,7 +9,7 @@ export default function SecondaryLayout() {
         <DarkVeil />
       </div>
       <div className="bg-black/20 absolute inset-0">
-        <Wrapper className="flex flex-col justify-between h-full">
+        <Wrapper className=" flex flex-col justify-between h-full py-12">
           <main className="h-full">
             <Outlet />
           </main>

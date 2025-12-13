@@ -6,6 +6,8 @@ interface props {
 }
 export default function Wrapper({ children, className }: props) {
   return (
-    <div className={cn("max-w-6xl mx-auto  py-9", className)}>{children}</div>
+    <div className={cn("max-w-6xl mx-auto px-4 sm:px-8  py-9", className)}>
+      {children}
+    </div>
   );
 }

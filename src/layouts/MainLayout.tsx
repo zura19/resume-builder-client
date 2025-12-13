@@ -13,7 +13,7 @@ export default function MainLayout() {
         noiseIntensity={1.5}
         rotation={0}
       />
-      <div className="bg-black/10 absolute inset-0">
+      <div className="bg-black/20 absolute inset-0">
         <Wrapper className="flex flex-col justify-between h-full">
           <Navbar />
           <main className="h-full">
