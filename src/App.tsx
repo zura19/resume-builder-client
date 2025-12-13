@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import SecondaryLayout from "./layouts/SecondaryLayout";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import BuildResume from "./pages/build";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         </Route>
 
         <Route element={<SecondaryLayout />}>
+          <Route path="/build" element={<BuildResume />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Route>

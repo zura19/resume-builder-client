@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { AtomIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Heading from "./Heading";
 
 export default function GetStarted() {
+  const navigate = useNavigate();
+
+  function handleStart() {
+    const isAuthenticated = true;
+    return isAuthenticated ? navigate("/build") : navigate("/login");
+  }
+
   return (
     <div className="h-full flex flex-col gap-8 items-center justify-center">
       <motion.div
@@ -46,7 +53,11 @@ export default function GetStarted() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
-          <Button size={"lg"} className="rounded-full font-medium">
+          <Button
+            onClick={handleStart}
+            size={"lg"}
+            className="rounded-full font-medium"
+          >
             Get Started
           </Button>
         </motion.div>
