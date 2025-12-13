@@ -126,4 +126,12 @@
   body {
     @apply font-roboto-flex bg-background text-foreground;
   }
+
+  .gradient-silver-to-top {
+    @apply bg-gradient-to-t  from-slate-100 to-slate-400 bg-clip-text text-transparent;
+  }
+
+  .gradient-nemesia-to-top {
+    @apply bg-gradient-to-t from-emerald-300 to-cyan-500 bg-clip-text text-transparent;
+  }
 }
