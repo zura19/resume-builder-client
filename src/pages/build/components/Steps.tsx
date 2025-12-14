@@ -1,3 +1,4 @@
+import { scaleAnimation } from "@/lib/animations/scaleAnimation";
 import useBuildResume from "@/lib/store/buildResumeState";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -33,7 +34,7 @@ export default function Steps() {
         >
           <div
             className={cn(
-              "size-10 flex items-center justify-center rounded-full",
+              "size-10 flex items-center justify-center rounded-full transition-all duration-500",
               step.id === activeStep
                 ? "bg-indigo-500 border"
                 : "border border-indigo-500 ",
@@ -41,9 +42,18 @@ export default function Steps() {
             )}
           >
             {activeStep > step.id ? (
-              <Check className="text-white  " strokeWidth={3} />
+              <motion.div
+                variants={scaleAnimation}
+                initial="initial"
+                animate="animate"
+              >
+                <Check className="text-gray-100  " strokeWidth={3} />
+              </motion.div>
             ) : (
-              <span
+              <motion.span
+                variants={scaleAnimation}
+                initial="initial"
+                animate="animate"
                 className={
                   step.id === activeStep
                     ? "text-white font-black"
@@ -51,7 +61,7 @@ export default function Steps() {
                 }
               >
                 {step.id}
-              </span>
+              </motion.span>
             )}
           </div>
           <div className="space-y-0.5">

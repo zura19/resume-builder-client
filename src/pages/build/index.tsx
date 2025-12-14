@@ -4,7 +4,6 @@ import EducationStep from "./modules/EducationStep";
 import PersonalInfoStep from "./modules/PersonalInfoStep";
 
 export default function BuildResume() {
-  // const step: number = 1;
   const { step } = useBuildResume();
 
   function returnStep() {
