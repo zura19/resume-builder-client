@@ -7,52 +7,51 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/shared/DatePicker";
-import type { Education } from "@/lib/types/buildResumeTypes";
+import type { Experience } from "@/lib/types/buildResumeTypes";
 import StepModal from "../components/StepModal";
+import { Textarea } from "@/components/ui/textarea";
 
-export default function EducationStep() {
-  const { nextStep, handleAddEducation, data } = useBuildResume();
+export default function ExperienceStep() {
+  const { nextStep, handleAddExperience, data } = useBuildResume();
 
-  const [university, setUniversity] = useState("");
-  const [degree, setDegree] = useState("");
-  const [fieldOfStudy, setFieldOfStudy] = useState("");
+  const [company, setCompany] = useState("");
+  const [position, setPosition] = useState("");
+  const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState(
     new Date(new Date().getTime() - 2 * 365 * 24 * 60 * 60 * 1000)
   );
   const [endDate, setEndDate] = useState(new Date());
-  const [stillStudying, setStillStudying] = useState(false);
+  const [stillWorking, setStillWorking] = useState(false);
 
   function add() {
-    const dataToAdd: Education = {
-      university,
-      degree,
-      fieldOfStudy,
+    const dataToAdd: Experience = {
+      company,
+      position,
+      description,
       startDate: startDate.toLocaleDateString(),
-      endDate: stillStudying ? null : endDate.toLocaleDateString(),
-      stillStudying,
+      endDate: stillWorking ? null : endDate.toLocaleDateString(),
+      stillWorking: stillWorking,
     };
 
-    handleAddEducation(dataToAdd);
+    handleAddExperience(dataToAdd);
 
-    setUniversity("");
-    setDegree("");
-    setFieldOfStudy("");
+    setCompany("");
+    setPosition("");
+    setDescription("");
     setStartDate(new Date());
     setEndDate(new Date());
-    setStillStudying(false);
   }
 
-  const dissableAdd =
-    !university || !degree || !fieldOfStudy || !startDate || !endDate;
+  const dissableAdd = !company || !position || !startDate || !endDate;
 
   return (
     <StepHeading
-      heading="Education"
-      description="Please provide your educational background. You can add multiple educations."
+      heading="Experience"
+      description="Please provide your work experience. You can add multiple experiences."
     >
       <div className="overflow-scroll h-[490px]  flex flex-col  gap-7 px-1">
         <div className="flex items-center justify-between">
-          <StepModal step="education" data={data.education} />
+          <StepModal step="experience" data={data.experience} />
 
           <Button
             size={"icon-lg"}
@@ -65,42 +64,48 @@ export default function EducationStep() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="university" className="font-semibold">
-            University
+          <Label htmlFor="company" className="font-semibold">
+            Company
           </Label>
           <Input
-            value={university}
-            onChange={(e) => setUniversity(e.target.value)}
-            name="university"
-            id="university"
-            placeholder="University Name"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            name="company"
+            id="company"
+            placeholder="company Name"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="fieldOfStudy" className="font-semibold">
-            Field of Study
+          <Label htmlFor="position" className="font-semibold">
+            Position
           </Label>
           <Input
-            value={fieldOfStudy}
-            onChange={(e) => setFieldOfStudy(e.target.value)}
-            name="fieldOfStudy"
-            id="fieldOfStudy"
-            placeholder="Computer Science"
+            value={position}
+            onChange={(e) => setPosition(e.target.value)}
+            name="position"
+            id="position"
+            placeholder="Front-end Developer"
           />
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="degree" className="font-semibold">
-            Degree
+        <div className="space-y-2 relative">
+          <Label htmlFor="description" className="font-semibold">
+            Description
           </Label>
-          <Input
-            value={degree}
-            onChange={(e) => setDegree(e.target.value)}
-            name="degree"
-            id="degree"
-            placeholder="Bachelor's Degree"
+          <Textarea
+            className="resize-none"
+            value={description}
+            onChange={(e) =>
+              e.target.value.length <= 100 && setDescription(e.target.value)
+            }
+            name="description"
+            id="description"
+            placeholder="In charge of front-end development..."
           />
+          <div className="absolute bottom-3.5 right-2 text-[10px]   bg-muted px-2 text-muted-foreground py-1 rounded-2xl border">
+            {description.length}/100
+          </div>
         </div>
 
         <div className="flex w-full gap-4">
@@ -123,24 +128,24 @@ export default function EducationStep() {
               </Label>
               <div className="flex text-sm items-center gap-1">
                 <label htmlFor="stillStudying" className="text-xs">
-                  Still Studying?
+                  Still Working?
                 </label>
                 <input
                   className="size-3.5"
                   type="checkbox"
-                  id="stillStudying"
-                  checked={stillStudying}
-                  onChange={(e) => setStillStudying(e.target.checked)}
+                  id="stillWorking"
+                  checked={stillWorking}
+                  onChange={(e) => setStillWorking(e.target.checked)}
                 />
               </div>
             </div>
-            {stillStudying ? (
+            {stillWorking ? (
               <Button
                 disabled={true}
                 className="w-full border"
                 variant={"secondary"}
               >
-                Still Studying
+                Still Working
               </Button>
             ) : (
               <DatePicker
@@ -154,7 +159,7 @@ export default function EducationStep() {
       </div>
       <div className="mt-auto">
         <StepFooter
-          disabledNext={data.education.length === 0}
+          disabledNext={data.experience.length === 0}
           handleNext={nextStep}
         />
       </div>

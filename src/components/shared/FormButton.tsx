@@ -11,6 +11,7 @@ interface props {
   type?: "button" | "submit" | "reset";
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost";
   size?: "default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg";
+  disabled?: boolean;
 }
 
 export default function FormButton({
@@ -22,12 +23,13 @@ export default function FormButton({
   type = "submit",
   variant = "default",
   size = "default",
+  disabled,
 }: props) {
   return (
     <Button
       className={className}
       onClick={onClick}
-      disabled={loading}
+      disabled={disabled || loading}
       type={type}
       variant={variant}
       size={size}

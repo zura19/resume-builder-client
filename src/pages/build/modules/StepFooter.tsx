@@ -8,10 +8,17 @@ interface props {
   loading?: boolean;
   loadingText?: string;
   handleNext?: () => void;
+  disabledNext?: boolean;
 }
 
 export default function StepFooter(props: props) {
-  const { nextText = "Next", loading, loadingText, handleNext } = props;
+  const {
+    nextText = "Next",
+    loading,
+    loadingText,
+    handleNext,
+    disabledNext,
+  } = props;
   const { step, prevStep } = useBuildResume();
   // const step: number = 1;
   return (
@@ -34,6 +41,7 @@ export default function StepFooter(props: props) {
         size="lg"
         onClick={handleNext}
         className="flex items-center gap-3 bg-indigo-500 text-white hover:bg-indigo-600"
+        disabled={disabledNext}
         loadingText={loadingText}
       >
         <span className="tracking-[1px]">{nextText}</span>

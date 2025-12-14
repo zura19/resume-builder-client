@@ -11,19 +11,20 @@ import {
 import useBuildResume from "@/lib/store/buildResumeState";
 
 export default function PersonalInfoStep() {
-  const { nextStep } = useBuildResume();
+  const { nextStep, handlePersonalInfo, data } = useBuildResume();
   const form = useForm<PersonalInfo>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
-      fullName: "",
-      email: "",
-      phone: "",
-      address: "",
+      fullName: data.personalInfo.fullName || "",
+      email: data.personalInfo.email || "",
+      phone: data.personalInfo.phone || "",
+      address: data.personalInfo.address || "",
     },
   });
 
   async function onSubmit(vals: PersonalInfo) {
     console.log(vals);
+    handlePersonalInfo(vals);
     nextStep();
   }
 
@@ -34,7 +35,7 @@ export default function PersonalInfoStep() {
     >
       <Form {...form}>
         <form
-          className="space-y-6 flex flex-col "
+          className="space-y-6 flex flex-col h-full"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormInput
@@ -64,7 +65,7 @@ export default function PersonalInfoStep() {
             control={form.control}
           />
 
-          <div className="">
+          <div className="mt-auto">
             <StepFooter />
           </div>
         </form>

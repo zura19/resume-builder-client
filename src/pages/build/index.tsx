@@ -2,9 +2,14 @@ import useBuildResume from "@/lib/store/buildResumeState";
 import BuildResumeTemplate from "./modules/BuildResumeTemplate";
 import EducationStep from "./modules/EducationStep";
 import PersonalInfoStep from "./modules/PersonalInfoStep";
+import ExperienceStep from "./modules/ExperienceStep";
+import SkillsStep from "./modules/SkillsStep";
+import ProjectsStep from "./modules/ProjectsStep";
 
 export default function BuildResume() {
-  const { step } = useBuildResume();
+  const { step, data } = useBuildResume();
+
+  console.log(data);
 
   function returnStep() {
     switch (step) {
@@ -12,8 +17,12 @@ export default function BuildResume() {
         return <PersonalInfoStep />;
       case 2:
         return <EducationStep />;
-      //   case 3:
-      // return <WorkExperienceStep />;
+      case 3:
+        return <ExperienceStep />;
+      case 4:
+        return <SkillsStep />;
+      case 5:
+        return <ProjectsStep />;
     }
   }
 

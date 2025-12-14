@@ -47,7 +47,7 @@ export default function LoginForm() {
 
         <AnimationProvider duration={0.7} initY={-40} delay={0.25}>
           <FormButton
-            className="w-full h-12 font-semibold text-lg"
+            className="w-full h-12 font-semibold text-lg bg-[#5B21B6] text-white hover:bg-[#5B21B6]/90"
             loading={false}
             type="submit"
           >
