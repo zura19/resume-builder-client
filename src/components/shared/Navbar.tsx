@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { BrainIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
@@ -8,7 +9,19 @@ export default function Navbar() {
       transition={{ duration: 1, ease: "easeInOut" }}
       className="flex items-center justify-between bg-muted/10 backdrop-blur-sm border border-border px-12  py-6 rounded-full"
     >
-      <h2 className="text-2xl text-white font-bold">Logo</h2>
+      {/* <div className="relative flex"> */}
+      {/* <FileUser
+          className="size-6 text-primary absolute translate-x-2 translate-y-1 z-[-10]"
+          strokeWidth={1}
+        /> */}
+      <BrainIcon className="size-6 text-primary" strokeWidth={2} />
+
+      {/* <img
+          src="/logo.png"
+          alt="logo"
+          className="size-10 text-muted object-cover rounded-full"
+        /> */}
+      {/* </div> */}
       <ul className="flex items-center gap-6">
         <li className="font-semibold">
           <Link to="/">Home</Link>

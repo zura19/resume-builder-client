@@ -8,6 +8,8 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StepModal from "../components/StepModal";
 import { Textarea } from "@/components/ui/textarea";
+import { useMutation } from "@tanstack/react-query";
+import { createResumeService } from "@/lib/services/resume/createResumeService";
 
 export default function ProjectsStep() {
   const { data, handleAddProject } = useBuildResume();
@@ -15,6 +17,16 @@ export default function ProjectsStep() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const {
+    mutate: createResume,
+    isPending,
+    // error,
+  } = useMutation({
+    mutationFn: async () => {
+      console.log(data);
+      return await createResumeService(data);
+    },
+  });
   const dissableAdd = !description || !title;
   function add() {
     const dataToAdd = {
@@ -27,9 +39,9 @@ export default function ProjectsStep() {
     setDescription("");
   }
 
-  function handleBuildResume() {
-    console.log(data);
-  }
+  // function handleBuildResume() {
+  //   console.log(data);
+  // }
 
   return (
     <StepHeading
@@ -85,8 +97,10 @@ export default function ProjectsStep() {
 
       <div className="mt-auto">
         <StepFooter
+          loading={isPending}
+          loadingText="Creating resume..."
           disabledNext={data.projects.length === 0}
-          handleNext={handleBuildResume}
+          handleNext={createResume}
           nextText="Build Resume"
         />
       </div>
