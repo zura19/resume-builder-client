@@ -36,8 +36,6 @@ export interface Project {
   description: string;
 }
 
-// export type SoftSkill = string;
-
 export interface Resume {
   personalInfo: PersonalInfo;
   education: Education[];

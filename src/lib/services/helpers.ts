@@ -23,7 +23,7 @@ export const postHeadersCredentials = {
   credentials: "include",
 };
 
-export const getCredentials = {
+export const getCredentials: RequestInit = {
   method: "GET",
   credentials: "include",
 };

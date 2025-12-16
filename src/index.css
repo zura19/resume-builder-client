@@ -45,6 +45,7 @@
 
   --font-roboto-flex: var(--roboto-flex);
   --font-roboto-mono: var(--roboto-mono);
+  --font-merriweather: var(--merriweather);
 }
 
 :root {
@@ -83,6 +84,7 @@
 
   --roboto-flex: "Roboto Flex", sans-serif;
   --roboto-mono: "Roboto Mono", monospace;
+  --merriweather: "Merriweather", serif;
 }
 
 .dark {
@@ -121,10 +123,10 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-[#ffffff1a] outline-[#ffffff26]/50;
   }
   body {
-    @apply font-roboto-flex bg-background text-foreground;
+    @apply font-roboto-flex bg-[#18181b] text-[#fafafa];
   }
 
   .gradient-silver-to-top {
