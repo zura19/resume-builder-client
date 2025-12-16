@@ -7,6 +7,7 @@ import type {
   skillType,
   Project,
 } from "../types/buildResumeTypes";
+import type { ResumeType } from "../types/AiGeneratedResume";
 
 interface ResumeState {
   step: number;
@@ -23,6 +24,7 @@ interface ResumeActions {
   handleAddSkill: (type: skillType, skill: string) => void;
   handleRemoveSkill: (type: skillType, skill: string) => void;
   handleAddProject: (project: Project) => void;
+  handleChangeType: (type: ResumeType) => void;
 }
 
 export type ResumeStore = ResumeState & ResumeActions;
@@ -44,6 +46,7 @@ const useBuildResume = create<ResumeStore>((set, get) => ({
       technical: [],
     },
     projects: [],
+    type: "modern",
   },
   nextStep: () => set((state) => ({ step: state.step + 1 })),
   prevStep: () =>
@@ -100,6 +103,11 @@ const useBuildResume = create<ResumeStore>((set, get) => ({
   handleAddProject: (project: Project) => {
     const state = get().data;
     set({ data: { ...state, projects: [...state.projects, project] } });
+  },
+
+  handleChangeType: (type: ResumeType) => {
+    const state = get().data;
+    set({ data: { ...state, type } });
   },
 }));
 

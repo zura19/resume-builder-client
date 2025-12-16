@@ -1,31 +1,47 @@
 import { getResumeByIdService } from "@/lib/services/resume/getResumeByIdSerice";
-import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
+import type {
+  AiGeneratedResume,
+  ResumeType,
+} from "@/lib/types/AiGeneratedResume";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import Resume from "./modules/Resume";
+import ResumeClassic from "./modules/classic/Resume";
+import ResumeModern from "./modules/modern/Resume";
 
 export default function ResumePage() {
   const { id } = useParams();
-
   const {
     data: res,
     isLoading,
     isError,
+    error,
   } = useQuery({
     queryKey: ["resume", id],
-    queryFn: async (): Promise<AiGeneratedResume> => {
+    queryFn: async (): Promise<{
+      resume: AiGeneratedResume;
+      type: ResumeType;
+    }> => {
       const d = await getResumeByIdService(id || "");
-      return JSON.parse(d.data.generatedResume);
+      return { resume: JSON.parse(d.data.generatedResume), type: d.data.type };
     },
   });
 
-  console.log(res);
+  function renderResume() {
+    if (!res) return;
+
+    switch (res.type) {
+      case "classic":
+        return <ResumeClassic resumeData={res.resume} />;
+      case "modern":
+        return <ResumeModern resumeData={res.resume} />;
+    }
+  }
 
   return (
     <>
-      {isError && <div>Error</div>}
+      {isError && <div>{error.message}</div>}
       {isLoading && <div>Loading...</div>}
-      <div className="">{res && <Resume resumeData={res} />}</div>
+      {res && renderResume()}
     </>
   );
 }

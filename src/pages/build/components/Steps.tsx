@@ -10,6 +10,7 @@ const steps = [
   { id: 3, title: "Work Experience" },
   { id: 4, title: "Skills" },
   { id: 5, title: "Projects" },
+  { id: 6, title: "Type" },
 ];
 
 // #5227ff

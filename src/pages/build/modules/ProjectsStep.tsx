@@ -8,25 +8,32 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StepModal from "../components/StepModal";
 import { Textarea } from "@/components/ui/textarea";
-import { useMutation } from "@tanstack/react-query";
-import { createResumeService } from "@/lib/services/resume/createResumeService";
+// import { useMutation } from "@tanstack/react-query";
+// import { createResumeService } from "@/lib/services/resume/createResumeService";
+// import { useNavigate } from "react-router-dom";
 
 export default function ProjectsStep() {
-  const { data, handleAddProject } = useBuildResume();
+  const { data, handleAddProject, nextStep } = useBuildResume();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const {
-    mutate: createResume,
-    isPending,
-    // error,
-  } = useMutation({
-    mutationFn: async () => {
-      console.log(data);
-      return await createResumeService(data);
-    },
-  });
+  // const navigate = useNavigate();
+  // const {
+  //   mutate: createResume,
+  //   isPending,
+  //   // error,
+  // } = useMutation({
+  //   mutationFn: async () => {
+  //     console.log(data);
+
+  //     return await createResumeService(data);
+  //   },
+  //   onSuccess: (data) => {
+  //     navigate(`/resume/${data.id}`);
+  //   },
+  // });
+
   const dissableAdd = !description || !title;
   function add() {
     const dataToAdd = {
@@ -38,10 +45,6 @@ export default function ProjectsStep() {
     setTitle("");
     setDescription("");
   }
-
-  // function handleBuildResume() {
-  //   console.log(data);
-  // }
 
   return (
     <StepHeading
@@ -97,11 +100,11 @@ export default function ProjectsStep() {
 
       <div className="mt-auto">
         <StepFooter
-          loading={isPending}
+          // loading={isPending}
           loadingText="Creating resume..."
           disabledNext={data.projects.length === 0}
-          handleNext={createResume}
-          nextText="Build Resume"
+          handleNext={nextStep}
+          nextText="Next"
         />
       </div>
     </StepHeading>

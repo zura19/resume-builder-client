@@ -4,35 +4,35 @@ import { FileDown } from "lucide-react";
 import PersonalInfoSection from "./PersonalInfo";
 import SkillsSection from "./Skills";
 import EducationSection from "./Education";
-import { usePDF } from "react-to-pdf";
 import { Button } from "@/components/ui/button";
 import Experience from "./Experience";
 import ProjectsSection from "./Projects";
+import useResume from "@/lib/hooks/useResume";
 
 interface props {
   resumeData: AiGeneratedResume;
+  isTemplate?: boolean;
 }
 
-export default function Resume({ resumeData }: props) {
-  const fileName = "resume" + "-" + new Date().getTime();
-  const { toPDF, targetRef } = usePDF({ filename: fileName });
+export default function ResumeClassic({
+  resumeData,
+  isTemplate = false,
+}: props) {
+  const { targetRef, handleDownload } = useResume();
 
   const { personalInfo, summary, skills, education, experience, projects } =
     resumeData;
 
-  const handleDownload = async () => {
-    await document.fonts.ready;
-    toPDF();
-  };
-
   return (
     <div className="relative">
-      <Button
-        className="absolute top-2 items-center left-2"
-        onClick={handleDownload}
-      >
-        Download PDF <FileDown />
-      </Button>
+      {!isTemplate && (
+        <Button
+          className="absolute top-4 right-4 items-center"
+          onClick={handleDownload}
+        >
+          Download PDF <FileDown />
+        </Button>
+      )}
       <div
         style={{ color: "black", backgroundColor: "white" }}
         ref={targetRef}

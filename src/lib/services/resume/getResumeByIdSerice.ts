@@ -1,8 +1,10 @@
 import { API, getCredentials } from "@/lib/services/helpers";
+import type { ResumeType } from "@/lib/types/AiGeneratedResume";
 import type { PromiseResponseSuccess } from "@/lib/types/requestResponseTypes";
 
 export async function getResumeByIdService(id: string): PromiseResponseSuccess<{
   id: string;
+  type: ResumeType;
   generatedResume: string;
   createdAt: string;
   updatedAt: string;

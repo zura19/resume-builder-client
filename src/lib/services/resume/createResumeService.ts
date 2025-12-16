@@ -1,7 +1,10 @@
 import type { Resume } from "@/lib/types/buildResumeTypes";
 import { API, postHeaders } from "@/lib/services/helpers";
+// import type { PromiseResponseSuccess } from "@/lib/types/requestResponseTypes";
 
-export async function createResumeService(body: Resume) {
+export async function createResumeService(
+  body: Resume
+): Promise<{ id: string; success: boolean }> {
   try {
     const res = await fetch(`${API}/resume`, {
       ...postHeaders,

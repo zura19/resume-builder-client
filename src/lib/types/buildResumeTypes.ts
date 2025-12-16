@@ -42,4 +42,5 @@ export interface Resume {
   experience: Experience[];
   skills: Skills;
   projects: Project[];
+  type: "classic" | "modern";
 }

@@ -5,6 +5,7 @@ import PersonalInfoStep from "./modules/PersonalInfoStep";
 import ExperienceStep from "./modules/ExperienceStep";
 import SkillsStep from "./modules/SkillsStep";
 import ProjectsStep from "./modules/ProjectsStep";
+import ChooseResumeTypeStep from "./modules/ChooseResumeTypeStep";
 
 export default function BuildResume() {
   const { step, data } = useBuildResume();
@@ -23,6 +24,8 @@ export default function BuildResume() {
         return <SkillsStep />;
       case 5:
         return <ProjectsStep />;
+      case 6:
+        return <ChooseResumeTypeStep />;
     }
   }
 

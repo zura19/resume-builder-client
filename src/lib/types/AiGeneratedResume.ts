@@ -22,3 +22,5 @@ export interface AiGeneratedResume {
     features: string[];
   }[];
 }
+
+export type ResumeType = "classic" | "modern";
