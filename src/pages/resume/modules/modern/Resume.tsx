@@ -31,11 +31,13 @@ export default function ResumeModern({
   //   const dummyData = resumeData;
 
   return (
-    <div className={`relative `}>
+    <div className={`relative max-h-full py-0 overflow-scroll rounded-lg`}>
       {!isTemplate && (
         <Button
           onClick={handleDownload}
-          className="absolute flex items-center top-5 right-5"
+          className="sticky top-0 w-full  left-full  rounded-none flex  items-center"
+
+          //   className="absolute flex items-center top-5 right-5"
         >
           Download PDF
           <FileDown />

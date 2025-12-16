@@ -24,10 +24,10 @@ export default function ResumeClassic({
     resumeData;
 
   return (
-    <div className="relative">
+    <div className="relative max-h-full overflow-scroll rounded-lg">
       {!isTemplate && (
         <Button
-          className="absolute top-4 right-4 items-center"
+          className="sticky top-0 w-full  left-full  rounded-none flex  items-center"
           onClick={handleDownload}
         >
           Download PDF <FileDown />
