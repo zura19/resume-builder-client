@@ -1,17 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { AtomIcon } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import Heading from "./Heading";
+import { Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
+import Heading from "../../Heading";
+import GetStartedBtn from "../../../components/GetStartedBtn";
 
 export default function GetStarted() {
-  const navigate = useNavigate();
-
-  function handleStart() {
-    const isAuthenticated = true;
-    return isAuthenticated ? navigate("/build") : navigate("/login");
-  }
-
   return (
     <div className="h-full flex flex-col gap-8 items-center justify-center">
       <motion.div
@@ -27,40 +21,26 @@ export default function GetStarted() {
             ease: "linear",
           },
         }}
-        className="flex items-center gap-2 bg-black/10 backdrop-blur-sm border border-border px-8  py-2 rounded-full"
+        className="flex items-center gap-4 bg-muted/20 backdrop-blur-sm border border-border px-8  py-2 rounded-full"
       >
         <motion.div
-          animate={{ rotate: 360 }}
+          animate={{ scale: [0.8, 1.1, 0.8] }}
           transition={{
             duration: 1,
-            rotate: {
-              repeat: Infinity,
-              duration: 2,
-              ease: "linear",
-            },
+            scale: { repeat: Infinity, duration: 2, ease: "linear" },
           }}
         >
-          <AtomIcon />
+          <Sparkles className="size-5 text-indigo-500" />
         </motion.div>
-        <p className="text-sm font-semibold"> We are working on it</p>
+        <span className="text-sm font-semibold">
+          Powered by Advanced AI Technology
+        </span>
       </motion.div>
 
       <Heading />
 
       <div className="flex items-center gap-4">
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-        >
-          <Button
-            onClick={handleStart}
-            size={"lg"}
-            className="rounded-full font-medium"
-          >
-            Get Started
-          </Button>
-        </motion.div>
+        <GetStartedBtn text="Get Started" />
 
         <motion.div
           initial={{ opacity: 0, x: 40 }}

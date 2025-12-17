@@ -1,27 +1,20 @@
+// import Navbar from "@/components/shared/Navbar";
+// import Wrapper from "@/components/shared/Wrapper";
+// import Silk from "@/components/Silk";
+// import GetStarted from "@/pages/home/modules/GetStarted";
+import { Footer } from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 import Wrapper from "@/components/shared/Wrapper";
-import Silk from "@/components/Silk";
 import { Outlet } from "react-router-dom";
 
 export default function MainLayout() {
   return (
-    <div className=" h-screen  relative">
-      <Silk
-        speed={5}
-        scale={1}
-        color="#5227ff"
-        noiseIntensity={1.5}
-        rotation={0}
-      />
-      <div className="bg-black/20 absolute inset-0">
-        <Wrapper className="flex flex-col justify-between h-full">
-          <Navbar />
-          <main className="h-full">
-            <Outlet />
-          </main>
-          {/* <GetStarted /> */}
-        </Wrapper>
-      </div>
+    <div className="">
+      <Wrapper className="fixed z-40 left-[13.5%] right-[13.5%]">
+        <Navbar />
+      </Wrapper>
+      <Outlet />
+      <Footer />
     </div>
   );
 }
