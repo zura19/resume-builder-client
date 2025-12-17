@@ -19,7 +19,7 @@ export default function Education({ data }: props) {
                 <p className="font-medium">{edu.university}</p>
                 <p className="text-[#6d6d6d] text-sm">{edu.fieldOfStudy}</p>
               </div>
-              <span className="text-sm whitespace-nowrap">
+              <span className="text-sm whitespace-nowrap text-[#6d6d6d]">
                 {edu.startDate} - {edu.stillStudying ? "Present" : edu.endDate}
               </span>
             </div>
