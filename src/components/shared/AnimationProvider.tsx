@@ -6,6 +6,8 @@ interface props {
   initX?: number;
   endY?: number | number[];
   endX?: number | number[];
+  exitX?: number;
+  exitY?: number;
   duration?: number;
   delay?: number;
   ease?: Easing;
@@ -18,6 +20,8 @@ function AnimationProvider(props: props) {
     initX,
     endY,
     endX,
+    exitX,
+    exitY,
     duration,
     ease,
     delay,
@@ -28,6 +32,7 @@ function AnimationProvider(props: props) {
       className={className}
       initial={{ opacity: 0, y: initY ?? 0, x: initX ?? 0 }}
       animate={{ opacity: 1, y: endY ?? 0, x: endX ?? 0 }}
+      exit={{ opacity: 1, y: exitY || endY, x: exitX || endX }}
       transition={{
         delay: delay ?? 0,
         duration: duration ?? 1,

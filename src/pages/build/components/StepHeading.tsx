@@ -9,7 +9,12 @@ interface props {
 export default function StepHeading(props: props) {
   const { children, heading, description } = props;
   return (
-    <AnimationProvider duration={0.7} initX={-20} className="  h-full">
+    <AnimationProvider
+      duration={0.7}
+      initX={-20}
+      exitX={200}
+      className="  h-full"
+    >
       <div className="space-y-1">
         <h1 className="text-indigo-500 text-4xl font-bold">{heading}</h1>
         <p className="text-sm text-muted-foreground">

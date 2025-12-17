@@ -30,7 +30,7 @@ interface ResumeActions {
 export type ResumeStore = ResumeState & ResumeActions;
 
 const useBuildResume = create<ResumeStore>((set, get) => ({
-  step: 1,
+  step: 6,
   data: {
     personalInfo: {
       fullName: "",

@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import ResumeClassic from "./modules/classic/Resume";
 import ResumeModern from "./modules/modern/Resume";
+import { fakeResume } from "@/constants/resume/fakeResume";
 
 export default function ResumePage() {
   const { id } = useParams();
@@ -31,9 +32,9 @@ export default function ResumePage() {
 
     switch (res.type) {
       case "classic":
-        return <ResumeClassic resumeData={res.resume} />;
+        return <ResumeClassic resumeData={fakeResume} />;
       case "modern":
-        return <ResumeModern resumeData={res.resume} />;
+        return <ResumeModern resumeData={fakeResume} />;
     }
   }
 
