@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-import Heading from "../../Heading";
+import Heading from "../../../components/Heading";
 import GetStartedBtn from "../../../components/GetStartedBtn";
 
 export default function GetStarted() {

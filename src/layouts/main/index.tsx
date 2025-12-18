@@ -9,8 +9,8 @@ import { Outlet } from "react-router-dom";
 
 export default function MainLayout() {
   return (
-    <div className="">
-      <Wrapper className="fixed z-40 w-full sm:w-auto sm:left-[13.5%] sm:right-[13.5%]">
+    <div className="relative w-full">
+      <Wrapper className="fixed inset-0 z-40 px-0 py-0 sm:py-6 sm:px-4">
         <Navbar />
       </Wrapper>
       <Outlet />
