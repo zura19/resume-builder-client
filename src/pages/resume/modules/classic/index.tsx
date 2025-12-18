@@ -1,12 +1,12 @@
 // import type { PersonalInfo } from "@/lib/schemas/personalInfoSchema";
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 import { FileDown } from "lucide-react";
-import PersonalInfoSection from "./PersonalInfo";
-import SkillsSection from "./Skills";
-import EducationSection from "./Education";
+import PersonalInfoSection from "./components/PersonalInfo";
+import SkillsSection from "./components/Skills";
+import EducationSection from "./components/Education";
 import { Button } from "@/components/ui/button";
-import Experience from "./Experience";
-import ProjectsSection from "./Projects";
+import Experience from "./components/Experience";
+import ProjectsSection from "./components/Projects";
 import useResume from "@/lib/hooks/useResume";
 
 interface props {

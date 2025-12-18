@@ -24,7 +24,7 @@ export default function SignupForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-5 max-w-[100%] mx-auto"
+        className="space-y-5 max-w-full mx-auto"
       >
         <AnimationProvider duration={0.7} initY={-40}>
           <FormInput

@@ -21,7 +21,7 @@ export default function GetStarted() {
             ease: "linear",
           },
         }}
-        className="flex items-center gap-4 bg-muted/20 backdrop-blur-sm border border-border px-8  py-2 rounded-full"
+        className="bg-muted/20 backdrop-blur-sm border border-border px-8  py-2 rounded-full hidden  sm:flex sm:items-center sm:gap-4 "
       >
         <motion.div
           animate={{ scale: [0.8, 1.1, 0.8] }}
@@ -29,6 +29,7 @@ export default function GetStarted() {
             duration: 1,
             scale: { repeat: Infinity, duration: 2, ease: "linear" },
           }}
+          // className="hidden sm:block"
         >
           <Sparkles className="size-5 text-indigo-500" />
         </motion.div>

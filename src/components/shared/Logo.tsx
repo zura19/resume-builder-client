@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Logo() {
   return (
-    <div className="flex text-lg items-center gap-1">
+    <div className="flex items-center gap-1">
       <motion.div
         animate={{ rotate: [-6, 6, -6] }}
         transition={{
@@ -12,11 +12,11 @@ export default function Logo() {
         }}
       >
         <Sparkles
-          className="size-7 text-indigo-500 transition-all duration-300 animate-pulse"
+          className="text-indigo-500 transition-all duration-300 size-5 sm:size-6 md:size-7 animate-pulse"
           strokeWidth={2}
         />
       </motion.div>
-      <p className="text-2xl font-bold ">ResumeAI</p>
+      <p className="font-bold text-lg sm:text-xl md:text-2xl">ResumeAI</p>
     </div>
   );
 }

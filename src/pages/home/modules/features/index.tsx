@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { features } from "@/constants/homepage/features";
 import Section from "../../components/Section";
-import FeatureCard from "./components/featureCard";
+import FeatureCard from "./components/FeatureCard";
 
 export function FeaturesSection() {
   return (
@@ -15,6 +15,7 @@ export function FeaturesSection() {
         {features.map((feature, i) => {
           return (
             <motion.div
+              key={feature.title}
               initial={{ opacity: 0 }}
               viewport={{ once: true }}
               whileInView={{ opacity: 1, y: [20, 0] }}

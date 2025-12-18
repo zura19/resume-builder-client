@@ -5,8 +5,8 @@ import type {
 } from "@/lib/types/AiGeneratedResume";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import ResumeClassic from "./modules/classic/Resume";
-import ResumeModern from "./modules/modern/Resume";
+import ResumeClassic from "./modules/classic";
+import ResumeModern from "./modules/modern";
 
 export default function ResumePage() {
   const { id } = useParams();

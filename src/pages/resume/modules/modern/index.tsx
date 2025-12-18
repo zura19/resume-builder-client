@@ -1,9 +1,9 @@
-import PersonalInfo from "./Personalnfo";
-import Summary from "./Summary";
-import Education from "./Education";
-import Experience from "./Experience";
-import Skills from "./Skills";
-import Projects from "./Projects";
+import PersonalInfo from "./components/Personalnfo";
+import Summary from "./components/Summary";
+import Education from "./components/Education";
+import Experience from "./components/Experience";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 import useResume from "@/lib/hooks/useResume";
 import { Button } from "@/components/ui/button";

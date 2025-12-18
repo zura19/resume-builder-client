@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import AnimatedText from "./AnimatedText";
-import AnimationProvider from "./AnimationProvider";
+import AnimatedText from "../../components/shared/AnimatedText";
+import AnimationProvider from "../../components/shared/AnimationProvider";
 
 interface props {
   templateFor: "login" | "register";

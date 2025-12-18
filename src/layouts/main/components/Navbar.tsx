@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Logo from "./Logo";
+import Logo from "../../../components/shared/Logo";
 export default function Navbar() {
   return (
     <motion.nav

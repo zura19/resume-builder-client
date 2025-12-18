@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import LoginForm from "./modules/LoginForm";
-import AuthTemplate from "@/components/shared/AuthTemplate";
+import AuthTemplate from "@/pages/auth/AuthTemplate";
 const api = import.meta.env.VITE_API_URL;
 
 export default function Login() {

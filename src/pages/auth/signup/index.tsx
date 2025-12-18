@@ -1,4 +1,4 @@
-import AuthTemplate from "@/components/shared/AuthTemplate";
+import AuthTemplate from "@/pages/auth/AuthTemplate";
 import SignupForm from "./modules/SignupForm";
 
 export default function Signup() {

@@ -44,7 +44,7 @@ export default function Section({
                 key={i}
                 custom={i}
                 variants={child as Variants}
-                className="mb-4 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl gradient-silver-to-top "
+                className="mb-4 text-4xl font-bold tracking-tight leading-8 md:leading-10 md:text-4xl lg:text-5xl gradient-silver-to-top "
               >
                 {word}
               </motion.span>

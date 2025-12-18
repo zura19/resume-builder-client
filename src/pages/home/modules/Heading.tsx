@@ -7,7 +7,7 @@ export default function Heading() {
   return (
     <AnimatedText
       text={text}
-      className="text-6xl text-balance tracking-tight font-bold text-center leading-18 max-w-[80%] "
+      className="text-balance tracking-tight font-bold text-center text-5xl sm:text-6xl sm:leading-18 sm:max-w-[80%] "
       textClassName={` gradient-silver-to-top`}
       customTextClassName={(word) =>
         word.toLocaleLowerCase() === "ai" ||

@@ -26,7 +26,8 @@ export function HowItWorksSection() {
                 delay: i * 0.2,
                 y: {
                   delay: 0,
-                  duration: 2,
+                  duration: 3,
+                  ease: "linear",
                   repeat: Infinity,
                 },
               }}
