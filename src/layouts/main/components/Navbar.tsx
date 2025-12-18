@@ -4,6 +4,13 @@ import Logo from "../../../components/shared/Logo";
 import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 export default function Navbar() {
+  function scrollIntoView(elementId: string) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
   return (
     <motion.nav
       initial={{ opacity: 0, y: -50 }}
@@ -13,17 +20,49 @@ export default function Navbar() {
     >
       <Logo />
 
-      <ul className="hidden sm:flex sm:items-center sm:gap-6">
-        <li className="font-semibold">
-          <Link to="/">Home</Link>
+      <ul className="hidden lg:flex lg:items-center lg:gap-6 ">
+        <li
+          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
+          onClick={() => scrollIntoView("features")}
+        >
+          Features
         </li>
-        <li className="font-semibold">
+
+        <li
+          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
+          onClick={() => scrollIntoView("how-it-works")}
+        >
+          How it works
+        </li>
+
+        <li
+          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
+          onClick={() => scrollIntoView("templates")}
+        >
+          Templates
+        </li>
+
+        <li
+          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
+          onClick={() => scrollIntoView("testimonials")}
+        >
+          Testimonials
+        </li>
+
+        <li
+          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
+          onClick={() => scrollIntoView("cta")}
+        >
+          Cta
+        </li>
+
+        <li className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300">
           <Link to="/login">Login</Link>
         </li>
       </ul>
 
-      <Button className="" size={"icon"} variant={"ghost"}>
-        <MenuIcon className="size-7 sm:hidden" />
+      <Button className=" lg:hidden" size={"icon"} variant={"ghost"}>
+        <MenuIcon className="size-7" />
       </Button>
     </motion.nav>
   );

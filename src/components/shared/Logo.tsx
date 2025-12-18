@@ -1,9 +1,17 @@
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Logo() {
+  const location = useLocation();
+
+  function handleScroll() {
+    if (location.pathname !== "/") return;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
-    <div className="flex items-center gap-1">
+    <Link to="/" onClick={handleScroll} className="flex items-center gap-1">
       <motion.div
         animate={{ rotate: [-6, 6, -6] }}
         transition={{
@@ -17,6 +25,6 @@ export default function Logo() {
         />
       </motion.div>
       <p className="font-bold text-lg sm:text-xl md:text-2xl">ResumeAI</p>
-    </div>
+    </Link>
   );
 }

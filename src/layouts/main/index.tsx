@@ -10,7 +10,7 @@ import { Outlet } from "react-router-dom";
 export default function MainLayout() {
   return (
     <div className="relative w-full">
-      <Wrapper className="fixed inset-0 z-40 px-0 py-0 sm:py-6 sm:px-4">
+      <Wrapper className="fixed  inset-x-0 z-40 px-0 sm:px-8 py-0 sm:top-4 rounded-full">
         <Navbar />
       </Wrapper>
       <Outlet />
