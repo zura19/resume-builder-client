@@ -16,7 +16,7 @@ export default function TemplateCard({ template }: props) {
       className="group border-border/50 bg-card/50 backdrop-blur overflow-hidden hover:border-accent/50 transition-colors"
     >
       <CardHeader
-        className={`h-48 bg-gradient-to-br ${template.color} flex items-center justify-center`}
+        className={`h-48 bg-linear-to-br ${template.color} flex items-center justify-center`}
       >
         <FileText className="h-20 w-20 text-foreground/40" />
       </CardHeader>

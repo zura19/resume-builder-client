@@ -1,3 +1,5 @@
+import type { ResumeType } from "./AiGeneratedResume";
+
 export interface PersonalInfo {
   fullName: string;
   email: string;
@@ -42,5 +44,5 @@ export interface Resume {
   experience: Experience[];
   skills: Skills;
   projects: Project[];
-  type: "classic" | "modern";
+  type: ResumeType;
 }

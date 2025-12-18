@@ -32,7 +32,7 @@ export default function Experience({ data }: props) {
                   key={idx}
                   className=" leading-relaxed flex gap-2 text-pretty"
                 >
-                  <span className="text-[#2c5f8d] mt-1.5 flex-shrink-0">•</span>
+                  <span className="text-[#2c5f8d] mt-1.5 shrink-0">•</span>
                   <span>{resp}</span>
                 </li>
               ))}

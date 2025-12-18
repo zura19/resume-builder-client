@@ -23,4 +23,4 @@ export interface AiGeneratedResume {
   }[];
 }
 
-export type ResumeType = "classic" | "modern";
+export type ResumeType = "classic" | "modern" | "creative" | "executive";

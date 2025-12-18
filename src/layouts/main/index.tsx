@@ -1,7 +1,3 @@
-// import Navbar from "@/components/shared/Navbar";
-// import Wrapper from "@/components/shared/Wrapper";
-// import Silk from "@/components/Silk";
-// import GetStarted from "@/pages/home/modules/GetStarted";
 import { Footer } from "@/layouts/main/components/Footer";
 import Navbar from "@/layouts/main/components/Navbar";
 import Wrapper from "@/components/shared/Wrapper";

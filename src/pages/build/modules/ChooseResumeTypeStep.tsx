@@ -28,7 +28,7 @@ export default function ChooseResumeTypeStep() {
       heading="Choose Resume Type"
       description="Select the type of resume you want to create."
     >
-      <div className="grid grid-cols-2 gap-8 rounded-lg p-4 h-[90%]">
+      <div className="grid grid-cols-2 gap-4 rounded-lg p-4 h-[90%]">
         {resumeTypeData.map((image) => (
           <motion.div
             key={image.type}
@@ -51,10 +51,10 @@ export default function ChooseResumeTypeStep() {
               scale: 1.01,
             }}
             onClick={() => handleChangeType(image.type)}
-            className={`relative aspect-[10/13]  rounded-lg cursor-pointer overflow-x-hidden`}
+            className={`relative   rounded-lg cursor-pointer overflow-x-hidden`}
           >
             <img
-              className="absolute w-full h-full object-cover"
+              className="absolute w-full h-full object-cover object-top "
               src={image.src}
               alt={image.alt}
             />

@@ -7,6 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import ResumeClassic from "./modules/classic";
 import ResumeModern from "./modules/modern";
+import ResumeCreative from "./modules/creative";
+import ResumeExecutive from "./modules/executive";
 
 export default function ResumePage() {
   const { id } = useParams();
@@ -34,6 +36,11 @@ export default function ResumePage() {
         return <ResumeClassic resumeData={res.resume} />;
       case "modern":
         return <ResumeModern resumeData={res.resume} />;
+      case "creative":
+        return <ResumeCreative resumeData={res.resume} />;
+      case "executive":
+        return <ResumeExecutive resumeData={res.resume} />;
+      default:
     }
   }
 
