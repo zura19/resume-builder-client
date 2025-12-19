@@ -1,11 +1,22 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../../components/shared/Logo";
-import { MenuIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+// import { MenuIcon } from "lucide-react";
+// import { Button } from "@/components/ui/button";
+import { navbarData } from "@/constants/navbar/navbar";
+import ResponsiveNav from "./ResponsiveNav";
+
 export default function Navbar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   function scrollIntoView(elementId: string) {
     const element = document.getElementById(elementId);
+    const currentPath = location.pathname;
+    if (currentPath !== "/") {
+      navigate("/");
+    }
+
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -20,50 +31,28 @@ export default function Navbar() {
     >
       <Logo />
 
-      <ul className="hidden lg:flex lg:items-center lg:gap-6 ">
-        <li
-          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
-          onClick={() => scrollIntoView("features")}
-        >
-          Features
-        </li>
-
-        <li
-          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
-          onClick={() => scrollIntoView("how-it-works")}
-        >
-          How it works
-        </li>
-
-        <li
-          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
-          onClick={() => scrollIntoView("templates")}
-        >
-          Templates
-        </li>
-
-        <li
-          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
-          onClick={() => scrollIntoView("testimonials")}
-        >
-          Testimonials
-        </li>
-
-        <li
-          className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
-          onClick={() => scrollIntoView("cta")}
-        >
-          Cta
-        </li>
-
-        <li className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300">
-          <Link to="/login">Login</Link>
-        </li>
+      <ul className="hidden lg:flex lg:items-center lg:gap-6">
+        {navbarData.map((item) =>
+          item.type === "link" ? (
+            <li
+              key={item.label}
+              className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
+            >
+              <Link to={item.to}>{item.label}</Link>
+            </li>
+          ) : (
+            <li
+              key={item.label}
+              className="font-semibold hover:text-muted-foreground cursor-pointer transition-all duration-300"
+              onClick={() => scrollIntoView(item.to)}
+            >
+              {item.label}
+            </li>
+          )
+        )}
       </ul>
 
-      <Button className=" lg:hidden" size={"icon"} variant={"ghost"}>
-        <MenuIcon className="size-7" />
-      </Button>
+      <ResponsiveNav scrollIntoView={scrollIntoView} />
     </motion.nav>
   );
 }
