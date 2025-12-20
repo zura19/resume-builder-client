@@ -9,12 +9,14 @@ import {
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 import { toast } from "sonner";
 import FormButton from "@/components/shared/FormButton";
+import useEditResume from "@/lib/hooks/useEditResume";
 
 interface props {
   resumeData: AiGeneratedResume;
+  id: string;
 }
 
-export default function PersonalInfo({ resumeData }: props) {
+export default function PersonalInfo({ resumeData, id }: props) {
   const form = useForm<PersonalInfo>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
@@ -24,6 +26,8 @@ export default function PersonalInfo({ resumeData }: props) {
       address: resumeData.personalInfo.address || "",
     },
   });
+
+  const { editResume, isPending } = useEditResume(id);
 
   function isChanged(vals: PersonalInfo) {
     return (
@@ -35,14 +39,15 @@ export default function PersonalInfo({ resumeData }: props) {
   }
 
   async function onSubmit(vals: PersonalInfo) {
-    if (!isChanged(vals)) toast.error("No changes made to personal info.");
+    if (!isChanged(vals))
+      return toast.error("No changes made to personal info.");
 
     const datToSent = {
       ...resumeData,
       personalInfo: vals,
     };
 
-    console.log(datToSent);
+    await editResume(datToSent);
   }
 
   return (
@@ -81,8 +86,8 @@ export default function PersonalInfo({ resumeData }: props) {
         <div className="mt-auto">
           <FormButton
             loadingText="Saving Personal Info"
-            loading={form.formState.isSubmitting}
-            disabled={!form.formState.isValid}
+            loading={form.formState.isSubmitting || isPending}
+            disabled={!form.formState.isValid || isPending}
             type="submit"
           >
             Save Personal Info

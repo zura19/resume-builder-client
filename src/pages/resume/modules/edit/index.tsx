@@ -7,21 +7,24 @@ import {
 } from "@/components/ui/accordion";
 import Summary from "./modules/summary";
 import PersonalInfo from "./modules/personal-info";
+import Skills from "./modules/skills";
 
 interface props {
   resumeData: AiGeneratedResume;
   type: "modal" | "page";
   disabledToOpen?: boolean;
+  id: string;
 }
 
 export default function Edit({
   resumeData,
   type = "page",
   disabledToOpen,
+  id,
 }: props) {
   const triggerClassName = "text-md font-medium";
-  // const disabledToOpen = "";
-  const { skills, experience, projects, education } = resumeData || {};
+
+  const { experience, projects, education } = resumeData || {};
   return (
     <div
       className={`h-full w-full bg-background ${
@@ -43,7 +46,7 @@ export default function Edit({
             Personal Info
           </AccordionTrigger>
           <AccordionContent>
-            <PersonalInfo resumeData={resumeData} />
+            <PersonalInfo id={id} resumeData={resumeData} />
           </AccordionContent>
         </AccordionItem>
 
@@ -52,7 +55,7 @@ export default function Edit({
             Summary
           </AccordionTrigger>
           <AccordionContent>
-            <Summary resumeData={resumeData} />
+            <Summary id={id} resumeData={resumeData} />
           </AccordionContent>
         </AccordionItem>
 
@@ -79,7 +82,8 @@ export default function Edit({
             Skills
           </AccordionTrigger>
           <AccordionContent>
-            <div>{JSON.stringify(skills)}</div>
+            <Skills id={id} resumeData={resumeData} />
+            {/* <div>{JSON.stringify(skills)}</div> */}
           </AccordionContent>
         </AccordionItem>
 

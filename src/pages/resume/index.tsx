@@ -38,6 +38,7 @@ export default function ResumePage() {
         {isError ? null : (
           <div className="hidden lg:block overflow-scroll">
             <Edit
+              id={id || ""}
               disabledToOpen={isLoading || isError}
               type="page"
               resumeData={res?.resume as AiGeneratedResume}

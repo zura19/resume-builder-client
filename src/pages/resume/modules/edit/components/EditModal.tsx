@@ -13,9 +13,10 @@ import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 
 interface props {
   resumeData: AiGeneratedResume;
+  id: string;
 }
 
-export default function EditModal({ resumeData }: props) {
+export default function EditModal({ resumeData, id }: props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -35,7 +36,7 @@ export default function EditModal({ resumeData }: props) {
             your resume details here.
           </DialogDescription>
         </DialogHeader>
-        <Edit type="modal" resumeData={resumeData} />
+        <Edit type="modal" id={id} resumeData={resumeData} />
       </DialogContent>
     </Dialog>
   );

@@ -22,11 +22,18 @@ export default function Logo({ className }: props) {
       className={cn("flex items-center gap-1", className)}
     >
       <motion.div
-        animate={{ rotate: [-6, 6, -6] }}
+        initial={{ rotate: 0 }}
+        animate={{ rotate: [0, 10, -5, 10, -5, 0] }}
         transition={{
           duration: 1,
-          rotate: { repeat: Infinity, duration: 4, ease: "linear" },
+          ease: "easeInOut",
+          rotate: { repeat: Infinity, repeatDelay: 4 },
         }}
+        // animate={{ rotate: [-6, 6, -6] }}
+        // transition={{
+        //   duration: 1,
+        //   rotate: { repeat: Infinity, duration: 4, ease: "linear" },
+        // }}
       >
         <Sparkles
           className="text-indigo-500 transition-all duration-300 size-5 sm:size-6 md:size-7 animate-pulse"
