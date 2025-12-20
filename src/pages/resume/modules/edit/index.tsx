@@ -11,10 +11,16 @@ import PersonalInfo from "./modules/personal-info";
 interface props {
   resumeData: AiGeneratedResume;
   type: "modal" | "page";
+  disabledToOpen?: boolean;
 }
 
-export default function Edit({ resumeData, type = "page" }: props) {
+export default function Edit({
+  resumeData,
+  type = "page",
+  disabledToOpen,
+}: props) {
   const triggerClassName = "text-md font-medium";
+  // const disabledToOpen = "";
   const { skills, experience, projects, education } = resumeData || {};
   return (
     <div
@@ -32,7 +38,7 @@ export default function Edit({ resumeData, type = "page" }: props) {
         </div>
       )}
       <Accordion type="single" collapsible>
-        <AccordionItem value="personal-info">
+        <AccordionItem disabled={disabledToOpen} value="personal-info">
           <AccordionTrigger className={triggerClassName}>
             Personal Info
           </AccordionTrigger>
@@ -41,7 +47,7 @@ export default function Edit({ resumeData, type = "page" }: props) {
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="summary">
+        <AccordionItem disabled={disabledToOpen} value="summary">
           <AccordionTrigger className={triggerClassName}>
             Summary
           </AccordionTrigger>
@@ -50,7 +56,7 @@ export default function Edit({ resumeData, type = "page" }: props) {
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="experience">
+        <AccordionItem disabled={disabledToOpen} value="experience">
           <AccordionTrigger className={triggerClassName}>
             Experience
           </AccordionTrigger>
@@ -59,7 +65,7 @@ export default function Edit({ resumeData, type = "page" }: props) {
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="education">
+        <AccordionItem disabled={disabledToOpen} value="education">
           <AccordionTrigger className={triggerClassName}>
             Education
           </AccordionTrigger>
@@ -68,7 +74,7 @@ export default function Edit({ resumeData, type = "page" }: props) {
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="skills">
+        <AccordionItem disabled={disabledToOpen} value="skills">
           <AccordionTrigger className={triggerClassName}>
             Skills
           </AccordionTrigger>
@@ -77,7 +83,7 @@ export default function Edit({ resumeData, type = "page" }: props) {
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="projects">
+        <AccordionItem disabled={disabledToOpen} value="projects">
           <AccordionTrigger className={triggerClassName}>
             Projects
           </AccordionTrigger>

@@ -34,10 +34,16 @@ export default function ResumePage() {
 
       <div className="max-w-350 px-4 mx-auto grid lg:grid-cols-[7fr_10fr] gap-6 py-16 h-dvh">
         <AnimatedGradient />
-        {isError && <p className="text-center">{error.message}</p>}
-        <div className="hidden lg:block overflow-scroll">
-          {<Edit type="page" resumeData={res?.resume as AiGeneratedResume} />}
-        </div>
+        {isError && <p className="text-center col-span-2">{error.message}</p>}
+        {isError ? null : (
+          <div className="hidden lg:block overflow-scroll">
+            <Edit
+              disabledToOpen={isLoading || isError}
+              type="page"
+              resumeData={res?.resume as AiGeneratedResume}
+            />
+          </div>
+        )}
 
         <ResumeWrapper
           isLoading={isLoading}
