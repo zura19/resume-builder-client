@@ -13,8 +13,8 @@ export default function AuthTemplate(props: props) {
     templateFor === "login" ? "Log in to your account" : "Create an account";
 
   return (
-    <div className="grid sm:grid-cols-[8fr_10fr]  h-full w-full bg-muted/40 border backdrop:backdrop-blur-2xl rounded-lg">
-      <div className="hidden sm:block">
+    <div className="grid sm:grid-cols-[8fr_10fr] w-full bg-muted/40 border backdrop:backdrop-blur-2xl rounded-lg">
+      <div className="relative overflow-hidden hidden sm:block">
         <img
           src="https://cdn.enhancv.com/Resume_photo_do_s_and_don_ts_7509c2143c.jpg"
           alt="login"

@@ -50,7 +50,7 @@ export default function Summary({ resumeData, id }: props) {
         <Button
           type="button"
           variant="outline"
-          disabled={isUpdatingSummary}
+          disabled={isUpdatingSummary || isPending}
           onClick={() => handleGenerateWithAI()}
           // disabled={!isChanged || isPending}
         >
