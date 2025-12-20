@@ -5,10 +5,10 @@ import type {
 } from "@/lib/types/AiGeneratedResume";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import ResumeClassic from "./modules/classic";
-import ResumeModern from "./modules/modern";
-import ResumeCreative from "./modules/creative";
-import ResumeExecutive from "./modules/executive";
+import { AnimatedGradient } from "../home/components/AnimatedGradient";
+import Edit from "./modules/edit";
+import Logo from "@/components/shared/Logo";
+import ResumeWrapper from "./modules/resume";
 
 export default function ResumePage() {
   const { id } = useParams();
@@ -18,7 +18,7 @@ export default function ResumePage() {
     isError,
     error,
   } = useQuery({
-    queryKey: ["resume", id],
+    queryKey: [`resume-${id}`, id],
     queryFn: async (): Promise<{
       resume: AiGeneratedResume;
       type: ResumeType;
@@ -28,27 +28,23 @@ export default function ResumePage() {
     },
   });
 
-  function renderResume() {
-    if (!res) return;
-
-    switch (res.type) {
-      case "classic":
-        return <ResumeClassic resumeData={res.resume} />;
-      case "modern":
-        return <ResumeModern resumeData={res.resume} />;
-      case "creative":
-        return <ResumeCreative resumeData={res.resume} />;
-      case "executive":
-        return <ResumeExecutive resumeData={res.resume} />;
-      default:
-    }
-  }
-
   return (
-    <>
-      {isError && <div>{error.message}</div>}
-      {isLoading && <div>Loading...</div>}
-      {res && renderResume()}
-    </>
+    <div>
+      <Logo className="absolute top-4.5 left-3 " />
+
+      <div className="max-w-350 px-4 mx-auto grid lg:grid-cols-[7fr_10fr] gap-6 py-16 h-dvh">
+        <AnimatedGradient />
+        {isError && <p className="text-center">{error.message}</p>}
+        <div className="hidden lg:block overflow-scroll">
+          {<Edit type="page" resumeData={res?.resume as AiGeneratedResume} />}
+        </div>
+
+        <ResumeWrapper
+          isLoading={isLoading}
+          resume={res?.resume as AiGeneratedResume}
+          type={res?.type as ResumeType}
+        />
+      </div>
+    </div>
   );
 }

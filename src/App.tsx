@@ -18,10 +18,10 @@ function App() {
 
         <Route element={<SecondaryLayout />}>
           <Route path="/build" element={<BuildResume />} />\
-          <Route path="/resume/:id" element={<Resume />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Route>
+        <Route path="/resume/:id" element={<Resume />} />
       </Routes>
     </BrowserRouter>
   );

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import Experience from "./components/Experience";
 import ProjectsSection from "./components/Projects";
 import useResume from "@/lib/hooks/useResume";
+import EditModal from "../../modules/edit/components/EditModal";
 
 interface props {
   resumeData: AiGeneratedResume;
@@ -26,13 +27,16 @@ export default function ResumeClassic({
   return (
     <div className="relative max-h-full overflow-scroll rounded-lg">
       {!isTemplate && (
-        <Button
-          className="sticky top-0 w-full  left-full  rounded-none flex  items-center"
-          onClick={handleDownload}
-        >
-          Download PDF <FileDown />
-        </Button>
+        <div className="sticky top-0 w-full  left-full  rounded-none flex flex-col items-center">
+          <EditModal resumeData={resumeData} />
+
+          <Button className="w-full rounded-none" onClick={handleDownload}>
+            Download PDF
+            <FileDown />
+          </Button>
+        </div>
       )}
+
       <div
         style={{ color: "black", backgroundColor: "white" }}
         ref={targetRef}

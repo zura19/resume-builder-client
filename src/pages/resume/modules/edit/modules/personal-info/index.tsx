@@ -1,0 +1,94 @@
+import { Form } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import FormInput from "@/components/shared/FormInput";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  personalInfoSchema,
+  type PersonalInfo,
+} from "@/lib/schemas/personalInfoSchema";
+import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
+import { toast } from "sonner";
+import FormButton from "@/components/shared/FormButton";
+
+interface props {
+  resumeData: AiGeneratedResume;
+}
+
+export default function PersonalInfo({ resumeData }: props) {
+  const form = useForm<PersonalInfo>({
+    resolver: zodResolver(personalInfoSchema),
+    defaultValues: {
+      fullName: resumeData.personalInfo.fullName || "",
+      email: resumeData.personalInfo.email || "",
+      phone: resumeData.personalInfo.phone || "",
+      address: resumeData.personalInfo.address || "",
+    },
+  });
+
+  function isChanged(vals: PersonalInfo) {
+    return (
+      vals.fullName !== resumeData.personalInfo.fullName ||
+      vals.email !== resumeData.personalInfo.email ||
+      vals.phone !== resumeData.personalInfo.phone ||
+      vals.address !== resumeData.personalInfo.address
+    );
+  }
+
+  async function onSubmit(vals: PersonalInfo) {
+    if (!isChanged(vals)) toast.error("No changes made to personal info.");
+
+    const datToSent = {
+      ...resumeData,
+      personalInfo: vals,
+    };
+
+    console.log(datToSent);
+  }
+
+  return (
+    <Form {...form}>
+      <form
+        className="space-y-6 py-4 flex flex-col h-full"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <FormInput
+          label="Full Name"
+          placeholder="John Doe"
+          name="fullName"
+          control={form.control}
+        />
+        <FormInput
+          label="Email Address"
+          placeholder="example@ex.com"
+          name="email"
+          control={form.control}
+        />
+
+        <FormInput
+          label="Phone Number"
+          placeholder="123-456-7890"
+          name="phone"
+          control={form.control}
+        />
+
+        <FormInput
+          label="Address"
+          placeholder="123 Main St"
+          name="address"
+          control={form.control}
+        />
+
+        <div className="mt-auto">
+          <FormButton
+            loadingText="Saving Personal Info"
+            loading={form.formState.isSubmitting}
+            disabled={!form.formState.isValid}
+            type="submit"
+          >
+            Save Personal Info
+          </FormButton>
+        </div>
+      </form>
+    </Form>
+  );
+}

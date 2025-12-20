@@ -8,6 +8,7 @@ import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 import useResume from "@/lib/hooks/useResume";
 import { Button } from "@/components/ui/button";
 import { FileDown } from "lucide-react";
+import EditModal from "../../modules/edit/components/EditModal";
 
 // forground - #1a1a1a
 // primary - #2c5f8d
@@ -33,15 +34,14 @@ export default function ResumeModern({
   return (
     <div className={`relative max-h-full py-0 overflow-scroll rounded-lg`}>
       {!isTemplate && (
-        <Button
-          onClick={handleDownload}
-          className="sticky top-0 w-full  left-full  rounded-none flex  items-center"
+        <div className="sticky top-0 w-full  left-full  rounded-none flex flex-col items-center">
+          <EditModal resumeData={resumeData} />
 
-          //   className="absolute flex items-center top-5 right-5"
-        >
-          Download PDF
-          <FileDown />
-        </Button>
+          <Button className="w-full rounded-none" onClick={handleDownload}>
+            Download PDF
+            <FileDown />
+          </Button>
+        </div>
       )}
 
       <div

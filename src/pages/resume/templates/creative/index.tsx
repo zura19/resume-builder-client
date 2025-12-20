@@ -9,6 +9,7 @@ import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 import { Button } from "@/components/ui/button";
 import useResume from "@/lib/hooks/useResume";
 import { FileDown } from "lucide-react";
+import EditModal from "../../modules/edit/components/EditModal";
 
 // Colors used:
 // Primary: cyan-500 (#06b6d4)
@@ -30,13 +31,13 @@ export default function ResumeCreative({
   return (
     <div className={`relative max-h-full py-0 overflow-scroll rounded-lg`}>
       {!isTemplate && (
-        <Button
-          onClick={handleDownload}
-          className="sticky top-0 w-full  left-full  rounded-none flex  items-center"
-        >
-          Download PDF
-          <FileDown />
-        </Button>
+        <div className="sticky top-0 w-full  left-full  rounded-none flex flex-col items-center">
+          <EditModal resumeData={resumeData} />
+          <Button className="w-full rounded-none" onClick={handleDownload}>
+            Download PDF
+            <FileDown />
+          </Button>
+        </div>
       )}
 
       <div ref={targetRef} className=" bg-[#ffffff] shadow-2xl overflow-hidden">

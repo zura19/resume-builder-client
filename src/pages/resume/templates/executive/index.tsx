@@ -18,6 +18,7 @@ import PersonalInfo from "./components/PersonalInfo";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Summary from "./components/Summary";
+import EditModal from "../../modules/edit/components/EditModal";
 
 interface props {
   resumeData: AiGeneratedResume;
@@ -34,13 +35,14 @@ export default function ResumeExecutive({
   return (
     <div className={`relative max-h-full py-0 overflow-scroll rounded-lg`}>
       {!isTemplate && (
-        <Button
-          onClick={handleDownload}
-          className="sticky top-0 w-full  left-full  rounded-none flex  items-center"
-        >
-          Download PDF
-          <FileDown />
-        </Button>
+        <div className="sticky top-0 w-full  left-full  rounded-none flex flex-col items-center">
+          <EditModal resumeData={resumeData} />
+
+          <Button className="w-full rounded-none" onClick={handleDownload}>
+            Download PDF
+            <FileDown />
+          </Button>
+        </div>
       )}
 
       <div ref={targetRef} className="bg-[#ffffff] shadow-xl">

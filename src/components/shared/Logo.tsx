@@ -1,8 +1,13 @@
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
-export default function Logo() {
+interface props {
+  className?: string;
+}
+
+export default function Logo({ className }: props) {
   const location = useLocation();
 
   function handleScroll() {
@@ -11,7 +16,11 @@ export default function Logo() {
   }
 
   return (
-    <Link to="/" onClick={handleScroll} className="flex items-center gap-1">
+    <Link
+      to="/"
+      onClick={handleScroll}
+      className={cn("flex items-center gap-1", className)}
+    >
       <motion.div
         animate={{ rotate: [-6, 6, -6] }}
         transition={{
