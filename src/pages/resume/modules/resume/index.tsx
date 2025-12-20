@@ -12,21 +12,22 @@ interface props {
   type: ResumeType;
   resume: AiGeneratedResume;
   isLoading: boolean;
+  id: string;
 }
 
-export default function ResumeWrapper({ resume, type, isLoading }: props) {
+export default function ResumeWrapper({ resume, type, isLoading, id }: props) {
   function renderResume() {
     if (!resume) return;
 
     switch (type) {
       case "classic":
-        return <ResumeClassic resumeData={resume} />;
+        return <ResumeClassic id={id} resumeData={resume} />;
       case "modern":
-        return <ResumeModern resumeData={resume} />;
+        return <ResumeModern id={id} resumeData={resume} />;
       case "creative":
-        return <ResumeCreative resumeData={resume} />;
+        return <ResumeCreative id={id} resumeData={resume} />;
       case "executive":
-        return <ResumeExecutive resumeData={resume} />;
+        return <ResumeExecutive id={id} resumeData={resume} />;
       default:
     }
   }

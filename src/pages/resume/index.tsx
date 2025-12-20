@@ -47,6 +47,7 @@ export default function ResumePage() {
         )}
 
         <ResumeWrapper
+          id={id || ""}
           isLoading={isLoading}
           resume={res?.resume as AiGeneratedResume}
           type={res?.type as ResumeType}

@@ -19,11 +19,13 @@ import EditModal from "../../modules/edit/components/EditModal";
 interface props {
   resumeData: AiGeneratedResume;
   isTemplate?: boolean;
+  id: string;
 }
 
 export default function ResumeModern({
   resumeData,
   isTemplate = false,
+  id,
 }: props) {
   const { targetRef, handleDownload } = useResume();
 
@@ -35,7 +37,7 @@ export default function ResumeModern({
     <div className={`relative max-h-full py-0 overflow-scroll rounded-lg`}>
       {!isTemplate && (
         <div className="sticky top-0 w-full  left-full  rounded-none flex flex-col items-center">
-          <EditModal resumeData={resumeData} />
+          <EditModal id={id} resumeData={resumeData} />
 
           <Button className="w-full rounded-none" onClick={handleDownload}>
             Download PDF
