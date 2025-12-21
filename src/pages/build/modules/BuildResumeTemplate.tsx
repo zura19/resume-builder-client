@@ -12,8 +12,7 @@ export default function BuildResumeTemplate({ children }: props) {
         <img
           className="h-full w-full object-cover rounded-lg rounded-r-none "
           alt="resume template image"
-          src="/bgb.jpg"
-          // src="/build-resume-bg.svg"
+          src="/build-resume-background.jpg"
         />
         <Steps />
       </div>
