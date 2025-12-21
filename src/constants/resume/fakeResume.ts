@@ -13,7 +13,7 @@ export const fakeResume: AiGeneratedResume = {
     {
       university: "University of California, Berkeley",
       degree: "Bachelor of Science",
-      fieldOfStudy: "Computer Science",
+      field: "Computer Science",
       startDate: "2015-09",
       endDate: "2019-05",
       stillStudying: false,
@@ -21,9 +21,8 @@ export const fakeResume: AiGeneratedResume = {
     {
       university: "Stanford University",
       degree: "Master of Science",
-      fieldOfStudy: "Software Engineering",
+      field: "Software Engineering",
       startDate: "2019-09",
-      endDate: null,
       stillStudying: true,
     },
   ],
