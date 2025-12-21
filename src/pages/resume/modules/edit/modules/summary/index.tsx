@@ -6,6 +6,7 @@ import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 import { SparklesIcon } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import SaveAlert from "../../components/SaveAlert";
 
 interface props {
   resumeData: AiGeneratedResume;
@@ -32,7 +33,9 @@ export default function Summary({ resumeData, id }: props) {
   }
 
   return (
-    <form onSubmit={handleSave} className="py-4">
+    <form onSubmit={handleSave} className=" space-y-4">
+      <SaveAlert />
+
       <Textarea
         value={summary}
         onChange={(e) => setSummary(e.target.value)}

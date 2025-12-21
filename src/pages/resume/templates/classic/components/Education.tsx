@@ -1,7 +1,7 @@
-import type { Education } from "@/lib/types/buildResumeTypes";
+import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 
 interface props {
-  education: Education[];
+  education: AiGeneratedResume["education"];
 }
 
 export default function EducationSection({ education }: props) {

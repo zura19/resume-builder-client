@@ -7,6 +7,7 @@ import { PlusIcon, X } from "lucide-react";
 import type { skillType } from "@/lib/types/buildResumeTypes";
 import FormButton from "@/components/shared/FormButton";
 import useEditResume from "@/lib/hooks/useEditResume";
+import SaveAlert from "../../components/SaveAlert";
 
 interface props {
   resumeData: AiGeneratedResume;
@@ -90,7 +91,9 @@ export default function Skills({ resumeData, id }: props) {
   }
 
   return (
-    <div className="overflow-scroll h-[490px]  pb-6 flex flex-col  gap-10 px-1">
+    <div className="pb-0 flex flex-col  gap-10 px-1">
+      <SaveAlert />
+
       <div>
         <div className="relative">
           <Label htmlFor="softSkills" className="font-semibold mb-2">

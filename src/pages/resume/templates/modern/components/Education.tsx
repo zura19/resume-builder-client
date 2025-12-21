@@ -1,7 +1,8 @@
+import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 import type { Education } from "@/lib/types/buildResumeTypes";
 
 interface props {
-  data: Education[];
+  data: AiGeneratedResume["education"];
 }
 
 export default function Education({ data }: props) {
@@ -17,7 +18,7 @@ export default function Education({ data }: props) {
               <div>
                 <h3 className="text-lg font-bold ">{edu.degree}</h3>
                 <p className="font-medium">{edu.university}</p>
-                <p className="text-[#6d6d6d] text-sm">{edu.fieldOfStudy}</p>
+                <p className="text-[#6d6d6d] text-sm">{edu.field}</p>
               </div>
               <span className="text-sm whitespace-nowrap text-[#6d6d6d]">
                 {edu.startDate} - {edu.stillStudying ? "Present" : edu.endDate}

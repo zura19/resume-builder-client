@@ -10,6 +10,7 @@ import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 import { toast } from "sonner";
 import FormButton from "@/components/shared/FormButton";
 import useEditResume from "@/lib/hooks/useEditResume";
+import SaveAlert from "../../components/SaveAlert";
 
 interface props {
   resumeData: AiGeneratedResume;
@@ -53,9 +54,11 @@ export default function PersonalInfo({ resumeData, id }: props) {
   return (
     <Form {...form}>
       <form
-        className="space-y-6 py-4 flex flex-col h-full"
+        className="space-y-6 flex flex-col h-full"
         onSubmit={form.handleSubmit(onSubmit)}
       >
+        <SaveAlert />
+
         <FormInput
           label="Full Name"
           placeholder="John Doe"

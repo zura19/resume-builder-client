@@ -1,5 +1,5 @@
 import { GraduationCap } from "lucide-react";
-import type { Education } from "@/lib/types/buildResumeTypes";
+import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 
 // Primary: cyan-500 (#06b6d4)
 // Accent: pink-500 (#ec4899)
@@ -8,7 +8,7 @@ import type { Education } from "@/lib/types/buildResumeTypes";
 // Secondary Text: gray-600 (#4b5563)
 
 interface props {
-  data: Education[];
+  data: AiGeneratedResume["education"];
 }
 
 export default function EducationSection({ data }: props) {
@@ -28,7 +28,7 @@ export default function EducationSection({ data }: props) {
               <GraduationCap className="w-6 h-6 text-[#06b6d4] mt-1" />
               <div className="flex-1">
                 <h3 className="text-lg font-bold">
-                  {edu.degree} in {edu.fieldOfStudy}
+                  {edu.degree} in {edu.field}
                 </h3>
                 <p className="font-semibold">{edu.university}</p>
                 <div className="flex flex-wrap gap-2 text-sm text-[#4b5563] mt-1">

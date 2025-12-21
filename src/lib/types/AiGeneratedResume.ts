@@ -1,9 +1,16 @@
-import type { Education, PersonalInfo } from "./buildResumeTypes";
+import type { PersonalInfo } from "./buildResumeTypes";
 
 export interface AiGeneratedResume {
   summary: string;
   personalInfo: PersonalInfo;
-  education: Education[];
+  education: {
+    university: string;
+    degree: string;
+    field: string;
+    startDate: string;
+    endDate?: string;
+    stillStudying?: boolean;
+  }[];
   experience: {
     company: string;
     position: string;

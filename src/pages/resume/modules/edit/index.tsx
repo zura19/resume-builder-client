@@ -8,6 +8,7 @@ import {
 import Summary from "./modules/summary";
 import PersonalInfo from "./modules/personal-info";
 import Skills from "./modules/skills";
+import Education from "./modules/education";
 
 interface props {
   resumeData: AiGeneratedResume;
@@ -24,7 +25,7 @@ export default function Edit({
 }: props) {
   const triggerClassName = "text-md font-medium";
 
-  const { experience, projects, education } = resumeData || {};
+  const { experience, projects } = resumeData || {};
   return (
     <div
       className={`h-full w-full bg-background ${
@@ -73,7 +74,8 @@ export default function Edit({
             Education
           </AccordionTrigger>
           <AccordionContent>
-            <div>{JSON.stringify(education)}</div>
+            <Education id={id} resumeData={resumeData} />
+            {/* <div>{JSON.stringify(education)}</div> */}
           </AccordionContent>
         </AccordionItem>
 
