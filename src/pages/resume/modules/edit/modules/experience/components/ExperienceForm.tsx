@@ -101,6 +101,8 @@ export default function ExperienceForm({
       </div>
 
       <ResponsebilitiesField
+        company={exp?.company as string}
+        position={exp?.position as string}
         responsibilities={responsibilities}
         setResponsibilities={setResponsibilities}
       />

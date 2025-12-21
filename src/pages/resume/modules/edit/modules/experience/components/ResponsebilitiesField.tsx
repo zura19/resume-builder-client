@@ -1,18 +1,40 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plus, Sparkles, X } from "lucide-react";
+import { generateResponsibilitieService } from "@/lib/services/ai/generateResponsibilitieService";
+import { useMutation } from "@tanstack/react-query";
+import { Loader, Plus, Sparkles, X } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface props {
   responsibilities: string[];
   setResponsibilities: React.Dispatch<React.SetStateAction<string[]>>;
+  company: string;
+  position: string;
 }
 export default function ResponsebilitiesField({
   responsibilities,
   setResponsibilities,
+  company,
+  position,
 }: props) {
   const [res, setRes] = useState("");
+
+  const { mutateAsync: generate, isPending: isGenerating } = useMutation({
+    mutationFn: async () => {
+      const data = await generateResponsibilitieService({
+        company,
+        position,
+        responsibilities,
+      });
+      return data;
+    },
+    onSuccess: (data) => {
+      setRes(data.data.responsibilitie);
+    },
+    onError: (error) => toast.error(error.message || "Failed to generate"),
+  });
 
   return (
     <div className="space-y-2 relative">
@@ -41,13 +63,27 @@ export default function ResponsebilitiesField({
         </Button>
       ) : (
         <Button
-          disabled={responsibilities.length >= 5}
+          onClick={() => generate()}
+          disabled={
+            responsibilities.length >= 5 ||
+            isGenerating ||
+            !company ||
+            !position
+          }
           variant={"default"}
-          // size={"icon-sm"}
           className="absolute top-0 text-xs right-2 translate-y-[115%] h-6 rounded-full"
         >
-          Generate With AI
-          <Sparkles className="size-3.5  text-indigo-500" />
+          {isGenerating ? (
+            <>
+              <span>Generating...</span>
+              <Loader className="size-3.5 animate-spin" />
+            </>
+          ) : (
+            <>
+              Generate With AI
+              <Sparkles className="size-3.5  text-indigo-500" />
+            </>
+          )}
         </Button>
       )}
 

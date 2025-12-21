@@ -8,6 +8,7 @@ import { toast } from "sonner";
 
 export default function useEditResume(id: string) {
   const queryClient = useQueryClient();
+
   const { mutateAsync: editResume, isPending } = useMutation({
     mutationFn: async (data: AiGeneratedResume) => {
       // const sent = {...data,}
