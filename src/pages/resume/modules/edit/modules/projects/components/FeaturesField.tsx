@@ -69,12 +69,12 @@ export default function FeaturesField({
         >
           {isGenerating ? (
             <>
-              <span>Generating...</span>
+              <span className="hidden sm:inline">Generating...</span>
               <Loader className="size-3.5 animate-spin" />
             </>
           ) : (
             <>
-              <span>Generate With AI</span>
+              <span className="hidden sm:inline">Generate With AI</span>
               <Sparkles className="size-3.5  text-indigo-500" />
             </>
           )}
