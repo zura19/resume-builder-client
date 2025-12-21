@@ -65,23 +65,14 @@ export default function Experience({ resumeData, id }: props) {
             index={i}
             resumeId={id}
           />
-
-          //   <EducationCard
-          //     deleteEducation={deleteEducation}
-          //     editEducation={editEducation}
-          //     key={edu.university + edu.degree + edu.field}
-          //     edu={edu}
-          //     index={i}
-          //     resumeId={id}
-          //   />
         ))}
       </AnimatePresence>
       <FormButton
-        loadingText="Saving..."
+        loadingText="Saving Experience..."
         loading={isPending}
         onClick={() => editResume({ ...resumeData, experience: experiences })}
       >
-        Save
+        Save Experience
       </FormButton>
     </div>
   );

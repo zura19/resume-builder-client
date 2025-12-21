@@ -5,34 +5,30 @@ import { Plus, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 
 interface props {
-  responsibilities: string[];
-  setResponsibilities: React.Dispatch<React.SetStateAction<string[]>>;
+  features: string[];
+  setFeatures: React.Dispatch<React.SetStateAction<string[]>>;
 }
-export default function ResponsebilitiesField({
-  responsibilities,
-  setResponsibilities,
-}: props) {
-  const [res, setRes] = useState("");
-
+export default function FeaturesField({ features, setFeatures }: props) {
+  const [feat, setFeat] = useState<string>("");
   return (
     <div className="space-y-2 relative">
-      <Label htmlFor="responsibilitie" className="font-semibold">
-        Responsibilities
+      <Label htmlFor="features" className="font-semibold">
+        Features
       </Label>
       <Input
         className="resize-none"
-        value={res}
-        onChange={(e) => setRes(e.target.value)}
-        name="responsibilitie"
-        id="responsibilitie"
-        placeholder="Describe your responsibilities here..."
+        value={feat}
+        onChange={(e) => setFeat(e.target.value)}
+        name="features"
+        id="features"
+        placeholder="Describe your feature here..."
       />
-      {res ? (
+      {feat ? (
         <Button
-          disabled={responsibilities.length >= 5}
+          disabled={features.length >= 5}
           onClick={() => {
-            setResponsibilities((prev) => [...prev, res]);
-            setRes("");
+            setFeatures((prev) => [...prev, feat]);
+            setFeat("");
           }}
           size={"icon-sm"}
           className="absolute top-0  right-2 translate-y-[115%] size-6 rounded-full"
@@ -41,7 +37,7 @@ export default function ResponsebilitiesField({
         </Button>
       ) : (
         <Button
-          disabled={responsibilities.length >= 5}
+          disabled={features.length >= 5}
           variant={"default"}
           // size={"icon-sm"}
           className="absolute top-0 text-xs right-2 translate-y-[115%] h-6 rounded-full"
@@ -51,9 +47,9 @@ export default function ResponsebilitiesField({
         </Button>
       )}
 
-      {responsibilities.length > 0 && (
+      {features.length > 0 && (
         <div className="space-y-3 mt-2 bg-muted/50 rounded-lg p-2">
-          {responsibilities.map((r, i) => (
+          {features.map((r, i) => (
             <div key={i} className="flex text-xs items-center justify-between">
               <span>{r}</span>
               <Button
@@ -61,9 +57,7 @@ export default function ResponsebilitiesField({
                 variant={"destructive"}
                 className="size-5 rounded-full"
                 onClick={() =>
-                  setResponsibilities(
-                    responsibilities.filter((_, index) => index !== i)
-                  )
+                  setFeatures(features.filter((_, index) => index !== i))
                 }
               >
                 <X className="size-3" />

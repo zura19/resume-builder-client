@@ -16,7 +16,6 @@ interface props {
 
 const convertStrToTime = (str: string) => new Date(str.replaceAll("/", "-"));
 const timeToStr = (time: Date) => time.toLocaleDateString();
-//   time.toISOString().split("T")[0].replaceAll("-", "/");
 
 export default function ExperienceForm({
   exp,
@@ -30,7 +29,6 @@ export default function ExperienceForm({
   const [responsibilities, setResponsibilities] = useState(
     exp?.responsibilities || []
   );
-  const [res, setRes] = useState("");
 
   const [startDate, setStartDate] = useState(
     exp?.startDate
@@ -105,8 +103,6 @@ export default function ExperienceForm({
       <ResponsebilitiesField
         responsibilities={responsibilities}
         setResponsibilities={setResponsibilities}
-        res={res}
-        setRes={setRes}
       />
 
       <div className="flex w-full gap-4">

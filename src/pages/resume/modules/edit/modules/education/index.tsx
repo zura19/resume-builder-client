@@ -66,11 +66,11 @@ export default function Education({ resumeData, id }: props) {
         ))}
       </AnimatePresence>
       <FormButton
-        loadingText="Saving..."
+        loadingText="Saving Education..."
         loading={isPending}
         onClick={() => editResume({ ...resumeData, education: educations })}
       >
-        Save
+        Save Education
       </FormButton>
     </div>
   );
