@@ -9,7 +9,6 @@ export function TemplatesSection() {
       id="templates"
       heading="Professional Templates"
       description="Choose from a variety of professionally designed templates"
-      background="black"
     >
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {templates.map((template, i) => (

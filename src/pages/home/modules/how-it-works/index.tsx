@@ -9,6 +9,7 @@ export function HowItWorksSection() {
       id="how-it-works"
       heading="How It Works"
       description="Three simple steps to create your perfect resume"
+      background="black"
     >
       <div className="grid gap-8 md:grid-cols-3">
         {steps.map((step, i) => {

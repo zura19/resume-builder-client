@@ -17,7 +17,7 @@ export function CTASection() {
     //       </p>
     <Section
       id="cta"
-      background="black"
+      // background="black"
       gradient="red"
       heading="Ready to Build Your Future?"
       description="Join thousands of professionals who have landed their dream jobs with ResumeAI. Start creating your perfect resume today."

@@ -9,7 +9,6 @@ export function FeaturesSection() {
       id="features"
       heading="Everything You Need to Land Your Dream Job"
       description="Powerful AI features designed to help you create resumes that get results"
-      background="black"
     >
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, i) => {

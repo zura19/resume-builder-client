@@ -9,6 +9,7 @@ export function TestimonialsSection() {
       id="testimonials"
       heading="Trusted by Job Seekers"
       description="See what our users are saying about ResumeAI"
+      background="black"
     >
       <div className="grid gap-6 md:grid-cols-3">
         {testimonials.map((testimonial, i) => (

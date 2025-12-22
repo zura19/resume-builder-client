@@ -29,8 +29,8 @@ export default function Edit({
 
   return (
     <div
-      className={`h-full w-full bg-background ${
-        type === "modal" ? "p-0" : "p-6 border rounded-lg"
+      className={`h-full w-full bg-background/50 backdrop-blur-xl ${
+        type === "modal" ? "p-0" : "p-6 border border-border/50 rounded-lg"
       }  overflow-y-scroll overflow-x-hidden `}
     >
       {type === "page" && (
