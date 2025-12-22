@@ -28,7 +28,7 @@ export default function ChooseResumeTypeStep() {
       heading="Choose Resume Type"
       description="Select the type of resume you want to create."
     >
-      <div className="grid grid-cols-2 gap-4 rounded-lg p-4 h-[90%]">
+      <div className="grid grid-cols-2 gap-4 rounded-lg px-1 sm:px-4 h-100 sm:h-110 overflow-y-scroll">
         {resumeTypeData.map((image) => (
           <motion.div
             key={image.type}

@@ -8,31 +8,12 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StepModal from "../components/StepModal";
 import { Textarea } from "@/components/ui/textarea";
-// import { useMutation } from "@tanstack/react-query";
-// import { createResumeService } from "@/lib/services/resume/createResumeService";
-// import { useNavigate } from "react-router-dom";
 
 export default function ProjectsStep() {
   const { data, handleAddProject, nextStep } = useBuildResume();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  // const navigate = useNavigate();
-  // const {
-  //   mutate: createResume,
-  //   isPending,
-  //   // error,
-  // } = useMutation({
-  //   mutationFn: async () => {
-  //     console.log(data);
-
-  //     return await createResumeService(data);
-  //   },
-  //   onSuccess: (data) => {
-  //     navigate(`/resume/${data.id}`);
-  //   },
-  // });
 
   const dissableAdd = !description || !title;
   function add() {
@@ -51,53 +32,54 @@ export default function ProjectsStep() {
       heading="Projects"
       description="Please provide your projects. You can add multiple projects."
     >
-      <div className="overflow-scroll h-[490px]  flex flex-col  gap-7 px-1">
-        <div className="flex items-center justify-between">
-          <StepModal step="projects" data={data.projects} />
+      <div className="flex flex-col  gap-7">
+        <div className="px-1 space-y-7 h-112 overflow-y-scroll">
+          <div className="flex items-center justify-between">
+            <StepModal step="projects" data={data.projects} />
 
-          <Button
-            size={"icon-lg"}
-            className="bg-indigo-600 rounded-full text-gray-100 font-bold hover:bg-indigo-500"
-            disabled={dissableAdd}
-            onClick={add}
-          >
-            <Plus className="size-5.5" strokeWidth={2.5} />
-          </Button>
-        </div>
+            <Button
+              size={"icon-lg"}
+              className="bg-indigo-600 rounded-full text-gray-100 font-bold hover:bg-indigo-500"
+              disabled={dissableAdd}
+              onClick={add}
+            >
+              <Plus className="size-5.5" strokeWidth={2.5} />
+            </Button>
+          </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="title" className="font-semibold">
-            Title
-          </Label>
-          <Input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            name="title"
-            id="title"
-            placeholder="Project title"
-          />
-        </div>
+          <div className="space-y-2">
+            <Label htmlFor="title" className="font-semibold">
+              Title
+            </Label>
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              name="title"
+              id="title"
+              placeholder="Project title"
+            />
+          </div>
 
-        <div className="space-y-2 relative">
-          <Label htmlFor="description" className="font-semibold">
-            Description
-          </Label>
-          <Textarea
-            className="resize-none min-h-32"
-            value={description}
-            onChange={(e) =>
-              e.target.value.length <= 250 && setDescription(e.target.value)
-            }
-            name="description"
-            id="description"
-            placeholder="In this project I worked on..."
-          />
-          <div className="absolute bottom-3.5 right-2 text-[10px]   bg-muted px-2 text-muted-foreground py-1 rounded-2xl border">
-            {description.length}/250
+          <div className="space-y-2 relative">
+            <Label htmlFor="description" className="font-semibold">
+              Description
+            </Label>
+            <Textarea
+              className="resize-none min-h-32"
+              value={description}
+              onChange={(e) =>
+                e.target.value.length <= 250 && setDescription(e.target.value)
+              }
+              name="description"
+              id="description"
+              placeholder="In this project I worked on..."
+            />
+            <div className="absolute bottom-3.5 right-2 text-[10px]   bg-muted px-2 text-muted-foreground py-1 rounded-2xl border">
+              {description.length}/250
+            </div>
           </div>
         </div>
       </div>
-
       <div className="mt-auto">
         <StepFooter
           // loading={isPending}
