@@ -1,5 +1,6 @@
 import { Star } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
+import SpotlightCard from "@/components/shared/SpotlightCard";
 
 interface props {
   testimonial: {
@@ -13,11 +14,8 @@ interface props {
 
 export default function TestimonialCard({ testimonial }: props) {
   return (
-    <Card
-      key={testimonial.name}
-      className="border-border/50 bg-card/50 backdrop-blur"
-    >
-      <CardContent className="pt-6">
+    <SpotlightCard key={testimonial.name}>
+      <CardContent className="pt-6 relative z-10">
         <div className="mb-4 flex gap-1">
           {[...Array(testimonial.rating)].map((_, i) => (
             <Star key={i} className="h-4 w-4 fill-indigo-500 text-indigo-500" />
@@ -33,6 +31,6 @@ export default function TestimonialCard({ testimonial }: props) {
           </div>
         </div>
       </CardContent>
-    </Card>
+    </SpotlightCard>
   );
 }

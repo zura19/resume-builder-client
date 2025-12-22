@@ -1,4 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card";
+import SpotlightCard from "@/components/shared/SpotlightCard";
+import { CardContent } from "@/components/ui/card";
 import type { LucideIcon } from "lucide-react";
 
 interface props {
@@ -15,13 +16,10 @@ interface props {
 export default function HowItWorksCard({ step, i }: props) {
   const Icon = step.icon;
   return (
-    <Card
-      key={step.step}
-      className="relative border-border/50 bg-card/50 backdrop-blur"
-    >
-      <CardContent className="pt-12 pb-8 px-6">
+    <SpotlightCard key={step.step} cardClassName="relative">
+      <CardContent className="relative z-10 pt-12 pb-8 px-6">
         <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10 mx-auto">
-          <Icon className="h-8 w-8 text-indigo-500" />
+          <Icon className="h-8 w-8 text-indigo-500 group-hover:text-indigo-300 transition-all duration-500" />
         </div>
         <div className="text-center">
           <div className="mb-3 text-sm font-mono text-indigo-500">
@@ -36,6 +34,6 @@ export default function HowItWorksCard({ step, i }: props) {
       {i < length - 1 && (
         <div className="hidden md:block absolute top-1/2 -right-4 h-0.5 w-8 bg-border/50" />
       )}
-    </Card>
+    </SpotlightCard>
   );
 }
