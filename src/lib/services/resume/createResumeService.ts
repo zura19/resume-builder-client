@@ -1,13 +1,14 @@
 import type { Resume } from "@/lib/types/buildResumeTypes";
-import { API, postHeaders } from "@/lib/services/helpers";
+import { API, postHeadersCredentials } from "@/lib/services/helpers";
+import type { PromiseResponseSuccess } from "@/lib/types/requestResponseTypes";
 // import type { PromiseResponseSuccess } from "@/lib/types/requestResponseTypes";
 
 export async function createResumeService(
   body: Resume
-): Promise<{ id: string; success: boolean }> {
+): PromiseResponseSuccess<{ resumeId: string }> {
   try {
     const res = await fetch(`${API}/resume`, {
-      ...postHeaders,
+      ...postHeadersCredentials,
       body: JSON.stringify(body),
     });
 

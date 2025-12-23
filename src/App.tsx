@@ -10,35 +10,39 @@ import NotFound from "./pages/notFound";
 import LightRaysLayout from "./layouts/lightRays";
 import Profile from "./pages/profile";
 import { useUser } from "./lib/store/userState";
-import type { JSX } from "react";
+import { Suspense } from "react";
 
 function App() {
   const { user } = useUser();
 
-  function checkIsAuthenticated(comp: JSX.Element, goto: string = "/login") {
-    return user ? comp : <Navigate to={goto} />;
-  }
-
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<p>about</p>} />
-        </Route>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<p>about</p>} />
+          </Route>
 
-        <Route element={<SecondaryLayout />}>
-          <Route path="/build" element={<BuildResume />} />\
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Route>
+          <Route element={<SecondaryLayout />}>
+            <Route path="/build" element={<BuildResume />} />\
+            <Route
+              path="/login"
+              element={user ? <Navigate to="/" /> : <Login />}
+            />
+            <Route path="/signup" element={<Signup />} />
+          </Route>
 
-        <Route element={<LightRaysLayout />}>
-          <Route path="/resume/:id" element={<Resume />} />
-          <Route path="/profile" element={checkIsAuthenticated(<Profile />)} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
+          <Route element={<LightRaysLayout />}>
+            <Route path="/resume/:id" element={<Resume />} />
+            <Route
+              path="/profile"
+              element={user ? <Profile /> : <Navigate to="/login" />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

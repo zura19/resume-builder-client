@@ -28,7 +28,7 @@ export default function EducationSection({ data }: props) {
               <GraduationCap className="w-6 h-6 text-[#06b6d4] mt-1" />
               <div className="flex-1">
                 <h3 className="text-lg font-bold">
-                  {edu.degree} in {edu.field}
+                  {edu.degree} in {edu.fieldOfStudy}
                 </h3>
                 <p className="font-semibold">{edu.university}</p>
                 <div className="flex flex-wrap gap-2 text-sm text-[#4b5563] mt-1">

@@ -58,7 +58,7 @@ export default function Education({ resumeData, id }: props) {
           <EducationCard
             deleteEducation={deleteEducation}
             editEducation={editEducation}
-            key={edu.university + edu.degree + edu.field}
+            key={edu.university + edu.degree + edu.fieldOfStudy}
             edu={edu}
             index={i}
             resumeId={id}

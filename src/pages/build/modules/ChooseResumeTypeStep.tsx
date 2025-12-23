@@ -6,9 +6,10 @@ import { useMutation } from "@tanstack/react-query";
 import { createResumeService } from "@/lib/services/resume/createResumeService";
 import { motion } from "framer-motion";
 import { resumeTypeData } from "@/constants/resume/resumeTypeData";
+import { toast } from "sonner";
 
 export default function ChooseResumeTypeStep() {
-  const { data, handleChangeType } = useBuildResume();
+  const { data, handleChangeType, reset } = useBuildResume();
   const type = data.type;
 
   const navigate = useNavigate();
@@ -19,7 +20,12 @@ export default function ChooseResumeTypeStep() {
       return await createResumeService(data);
     },
     onSuccess: (data) => {
-      navigate(`/resume/${data.id}`);
+      toast.success("Resume created successfully");
+      reset();
+      navigate(`/resume/${data.data.resumeId}`);
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to create resume");
     },
   });
 

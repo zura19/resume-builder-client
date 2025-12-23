@@ -41,7 +41,7 @@ export default function ExperienceModal(props: props) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {session === "edit" ? "Edit Education" : "Add Education"}
+            {session === "edit" ? "Edit Experience" : "Add Experience"}
           </DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>

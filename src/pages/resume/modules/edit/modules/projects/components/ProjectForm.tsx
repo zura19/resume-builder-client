@@ -67,7 +67,7 @@ export default function ProjectForm({
       </div>
 
       <FeaturesField
-        title={proj?.title || ""}
+        title={title}
         technologies={proj?.technologies || []}
         features={features}
         setFeatures={setFeatures}

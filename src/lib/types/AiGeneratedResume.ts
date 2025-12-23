@@ -6,7 +6,7 @@ export interface AiGeneratedResume {
   education: {
     university: string;
     degree: string;
-    field: string;
+    fieldOfStudy: string;
     startDate: string;
     endDate?: string;
     stillStudying?: boolean;

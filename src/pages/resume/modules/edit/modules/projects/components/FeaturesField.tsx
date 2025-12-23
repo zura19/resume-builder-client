@@ -58,12 +58,7 @@ export default function FeaturesField({
       ) : (
         <Button
           onClick={() => generate()}
-          disabled={
-            features.length >= 5 ||
-            isGenerating ||
-            !title ||
-            !technologies.length
-          }
+          disabled={features.length >= 5 || isGenerating || !title}
           variant={"default"}
           className="absolute top-0 text-xs right-2 translate-y-[115%] h-6 rounded-full"
         >

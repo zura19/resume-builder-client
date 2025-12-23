@@ -18,14 +18,16 @@ export default function ResumePage() {
     error,
   } = useQuery({
     queryKey: [`resume-${id}`, id],
-    queryFn: async (): Promise<{
-      resume: AiGeneratedResume;
-      type: ResumeType;
-    }> => {
+    queryFn: async () => {
       const d = await getResumeByIdService(id || "");
-      return { resume: JSON.parse(d.data.generatedResume), type: d.data.type };
+      return {
+        resume: JSON.parse(d.data.resume.generatedResume),
+        type: d.data.resume.type,
+      };
     },
   });
+
+  console.log(res);
 
   return (
     <div>

@@ -3,11 +3,13 @@ import type { ResumeType } from "@/lib/types/AiGeneratedResume";
 import type { PromiseResponseSuccess } from "@/lib/types/requestResponseTypes";
 
 export async function getResumeByIdService(id: string): PromiseResponseSuccess<{
-  id: string;
-  type: ResumeType;
-  generatedResume: string;
-  createdAt: string;
-  updatedAt: string;
+  resume: {
+    id: string;
+    type: ResumeType;
+    generatedResume: string;
+    createdAt: string;
+    updatedAt: string;
+  };
 }> {
   try {
     const res = await fetch(`${API}/resume/${id}`, {

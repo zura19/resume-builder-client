@@ -41,7 +41,7 @@ export default function EducationCard({
     >
       <div className="flex items-center justify-between">
         <h3 className="font-semibold text-lg">
-          {edu.degree} in {edu.field}
+          {edu.degree} in {edu.fieldOfStudy}
         </h3>
         <div className="flex items-center gap-2">
           <EducationModal edu={edu} session="edit" editEducation={edit} />

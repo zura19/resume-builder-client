@@ -22,7 +22,7 @@ export default function EducationSection({ data }: props) {
             </div>
             <div className="flex-1">
               <h3 className="text-lg font-bold text-[#0f172a]">{edu.degree}</h3>
-              <p className="text-[#334155] font-semibold">{edu.field}</p>
+              <p className="text-[#334155] font-semibold">{edu.fieldOfStudy}</p>
               <p className="text-[#475569]">{edu.university}</p>
               <div className="flex gap-3 text-sm text-[#64748b] mt-1">
                 {/* <span>{edu.}</span> */}

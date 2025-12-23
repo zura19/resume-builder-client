@@ -12,6 +12,7 @@ export default function useEditResume(id: string) {
   const { mutateAsync: editResume, isPending } = useMutation({
     mutationFn: async (data: AiGeneratedResume) => {
       // const sent = {...data,}
+
       const re = await updateResumeService(id, data);
       return re.data;
     },

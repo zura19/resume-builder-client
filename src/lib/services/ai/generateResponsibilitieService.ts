@@ -1,5 +1,5 @@
 import type { PromiseResponseSuccess } from "@/lib/types/requestResponseTypes";
-import { API, postHeaders } from "../helpers";
+import { API, postHeadersCredentials } from "../helpers";
 
 export async function generateResponsibilitieService(data: {
   company: string;
@@ -8,7 +8,7 @@ export async function generateResponsibilitieService(data: {
 }): PromiseResponseSuccess<{ responsibilitie: string }> {
   try {
     const res = await fetch(`${API}/resume/generate/responsibilitie`, {
-      ...postHeaders,
+      ...postHeadersCredentials,
       body: JSON.stringify(data),
     });
 

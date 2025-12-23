@@ -17,6 +17,7 @@ interface ResumeState {
 interface ResumeActions {
   nextStep: () => void;
   prevStep: () => void;
+  reset: () => void;
 
   handlePersonalInfo: (personalInfo: PersonalInfo) => void;
   handleAddEducation: (education: Education) => void;
@@ -51,6 +52,27 @@ const useBuildResume = create<ResumeStore>((set, get) => ({
   nextStep: () => set((state) => ({ step: state.step + 1 })),
   prevStep: () =>
     set((state) => ({ step: state.step === 1 ? 1 : state.step - 1 })),
+  reset: () =>
+    set({
+      step: 1,
+      data: {
+        personalInfo: {
+          fullName: "",
+          email: "",
+          phone: "",
+          address: "",
+        },
+        education: [],
+        experience: [],
+        skills: {
+          soft: [],
+          languages: [],
+          technical: [],
+        },
+        projects: [],
+        type: "modern",
+      },
+    }),
 
   handlePersonalInfo: (personalInfo: PersonalInfo) => {
     const state = get().data;

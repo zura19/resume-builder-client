@@ -1,6 +1,11 @@
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
 import type { PromiseResponseSuccess } from "@/lib/types/requestResponseTypes";
-import { API, postHeaders, putHeaders } from "../helpers";
+import {
+  API,
+  postHeadersCredentials,
+  putHeaders,
+  // putHeadersCredentials,
+} from "../helpers";
 
 export async function updateResumeService(
   resumeId: string,
@@ -31,7 +36,7 @@ export async function updateSummaryService(
 ): PromiseResponseSuccess<{ summary: string }> {
   try {
     const res = await fetch(`${API}/resume/summary/${resumeId}`, {
-      ...postHeaders,
+      ...postHeadersCredentials,
       body: JSON.stringify(data),
     });
 

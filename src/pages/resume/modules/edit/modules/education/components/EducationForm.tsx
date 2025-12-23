@@ -26,7 +26,7 @@ export default function EducationForm({
 }: props) {
   const [university, setUniversity] = useState(edu?.university || "");
   const [degree, setDegree] = useState(edu?.degree || "");
-  const [field, setField] = useState(edu?.field || "");
+  const [field, setField] = useState(edu?.fieldOfStudy || "");
   const [startDate, setStartDate] = useState(
     edu?.startDate
       ? convertStrToTime(edu.startDate)
@@ -61,7 +61,7 @@ export default function EducationForm({
       addEducation({
         university,
         degree,
-        field,
+        fieldOfStudy: field,
         startDate: timeToStr(startDate),
         endDate: stillStudying ? "Present" : timeToStr(endDate),
       });
@@ -69,7 +69,7 @@ export default function EducationForm({
       editEducation({
         university,
         degree,
-        field,
+        fieldOfStudy: field,
         startDate: timeToStr(startDate),
         endDate: stillStudying ? "Present" : timeToStr(endDate),
       });

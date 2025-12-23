@@ -27,6 +27,7 @@ export default function Summary({ resumeData, id }: props) {
   }
 
   async function handleGenerateWithAI() {
+    console.log(resumeData);
     const res = await updateSummary({ ...resumeData });
     console.log(res);
     setSummary(res.summary);

@@ -35,7 +35,7 @@ export const putHeaders = {
   },
 };
 
-export const putHeadersCredentials = {
+export const putHeadersCredentials: RequestInit = {
   method: "PUT",
   headers: {
     "Content-Type": "application/json",
