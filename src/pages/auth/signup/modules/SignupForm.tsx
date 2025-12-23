@@ -5,19 +5,30 @@ import { useForm } from "react-hook-form";
 import AnimationProvider from "@/components/shared/AnimationProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema, type SignupSchema } from "@/lib/schemas/signupSchema";
+import { registerService } from "@/lib/services/auth/registerService";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupForm() {
   const form = useForm<SignupSchema>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
-      name: "",
+      fullName: "",
       email: "",
       password: "",
     },
   });
+  const navigate = useNavigate();
 
   async function onSubmit(vals: SignupSchema) {
-    console.log(vals);
+    const data = await registerService(vals);
+
+    if (data.success) {
+      console.log(data.data.user);
+      toast.success(data.message);
+      navigate("/login");
+      form.reset();
+    }
   }
 
   return (
@@ -28,8 +39,8 @@ export default function SignupForm() {
       >
         <AnimationProvider duration={0.7} initY={-40}>
           <FormInput
-            placeholder="JohnDoe"
-            name="name"
+            placeholder="John Doe"
+            name="fullName"
             control={form.control}
             className="h-12"
           />
@@ -57,7 +68,9 @@ export default function SignupForm() {
         <AnimationProvider duration={0.7} initY={-40} delay={0.35}>
           <FormButton
             className="w-full h-12 font-semibold text-lg bg-[#5B21B6] text-white hover:bg-[#5B21B6]/90"
-            loading={false}
+            loading={form.formState.isSubmitting}
+            disabled={form.formState.isSubmitting}
+            loadingText="Signing Up..."
             type="submit"
           >
             Sign Up

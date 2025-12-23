@@ -15,7 +15,7 @@ export const postHeaders = {
     "Content-Type": "application/json",
   },
 };
-export const postHeadersCredentials = {
+export const postHeadersCredentials: RequestInit = {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
