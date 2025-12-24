@@ -81,7 +81,11 @@ export default function Navbar() {
         {user && <UserAvatar goto="/profile" />}
       </ul>
 
-      <ResponsiveNav scrollIntoView={scrollIntoView} />
+      <ResponsiveNav
+        isUser={!!user}
+        navbarData={navbarData}
+        scrollIntoView={scrollIntoView}
+      />
     </motion.nav>
   );
 }

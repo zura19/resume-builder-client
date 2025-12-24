@@ -70,7 +70,7 @@ export default function Section({
               viewport={{ once: true }}
               initial={{ opacity: 0, filter: "blur(6px)" }}
               whileInView={{ opacity: 1, filter: "blur(0px)" }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.4 }}
               className="text-lg text-muted-foreground"
             >
               {description}
@@ -111,7 +111,7 @@ export default function Section({
             viewport={{ once: true }}
             initial={{ opacity: 0, filter: "blur(6px)" }}
             whileInView={{ opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.4 }}
             className="text-lg text-muted-foreground"
           >
             {description}

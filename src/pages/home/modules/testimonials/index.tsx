@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { testimonials } from "@/constants/homepage/testimonials";
 import Section from "../../components/Section";
 import TestimonialCard from "./components/TestimonialCard";
+import { containerVariant, itemVariant } from "@/lib/animations/cardAppear";
 
 export function TestimonialsSection() {
   return (
@@ -11,7 +12,25 @@ export function TestimonialsSection() {
       description="See what our users are saying about ResumeAI"
       background="black"
     >
-      <div className="grid gap-6 md:grid-cols-3">
+      <motion.div
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="grid gap-6 md:grid-cols-3"
+      >
+        {testimonials.map((testimonial) => (
+          <motion.div
+            key={testimonial.name}
+            variants={itemVariant}
+            className="rounded-lg"
+          >
+            <TestimonialCard testimonial={testimonial} />
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* <div className="grid gap-6 md:grid-cols-3">
         {testimonials.map((testimonial, i) => (
           <motion.div
             key={testimonial.name}
@@ -23,7 +42,7 @@ export function TestimonialsSection() {
             <TestimonialCard testimonial={testimonial} />
           </motion.div>
         ))}
-      </div>
+      </div> */}
     </Section>
   );
 }

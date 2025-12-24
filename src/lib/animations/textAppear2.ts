@@ -23,7 +23,7 @@ const child = {
     y: 0,
     filter: "blur(0px)",
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       ease: "easeOut",
     },
   }),

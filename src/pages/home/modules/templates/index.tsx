@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { templates } from "@/constants/homepage/templates";
 import Section from "../../components/Section";
 import TemplateCard from "./components/TemplateCard";
+import { containerVariant, itemVariant } from "@/lib/animations/cardAppear";
 
 export function TemplatesSection() {
   return (
@@ -10,7 +11,20 @@ export function TemplatesSection() {
       heading="Professional Templates"
       description="Choose from a variety of professionally designed templates"
     >
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <motion.div
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+      >
+        {templates.map((template) => (
+          <motion.div key={template.name} variants={itemVariant}>
+            <TemplateCard template={template} />
+          </motion.div>
+        ))}
+      </motion.div>
+      {/* <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {templates.map((template, i) => (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -22,7 +36,7 @@ export function TemplatesSection() {
             <TemplateCard template={template} />
           </motion.div>
         ))}
-      </div>
+      </div> */}
     </Section>
   );
 }

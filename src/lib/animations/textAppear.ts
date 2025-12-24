@@ -20,7 +20,7 @@ const child = {
     scale: [0.5, 1.08, 1],
     rotate: i % 2 === 0 ? [-4, 1, -0.5, 0] : [4, -1, 0.5, 0],
     transition: {
-      duration: 0.7,
+      duration: 0.4,
       ease: "easeOut",
     },
   }),

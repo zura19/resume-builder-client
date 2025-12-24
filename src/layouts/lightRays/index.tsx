@@ -15,7 +15,7 @@ export default function LightRaysLayout() {
   const showNavbar = showNavbarRoutes.includes(location.pathname);
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
+    <div className="relative w-full min-h-dvh bg-black overflow-hidden">
       {/* Background rays */}
       <div className="absolute inset-0">
         <LightRays

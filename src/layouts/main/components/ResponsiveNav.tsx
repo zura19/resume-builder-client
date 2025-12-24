@@ -7,17 +7,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { navbarData } from "@/constants/navbar/navbar";
+import type { NavbarItem } from "@/constants/navbar/navbar";
 import { cn } from "@/lib/utils";
 import { MenuIcon } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface props {
+  navbarData: NavbarItem[];
+  isUser: boolean;
   scrollIntoView: (elementId: string) => void;
 }
 
-export default function ResponsiveNav({ scrollIntoView }: props) {
+export default function ResponsiveNav({
+  scrollIntoView,
+  navbarData,
+  isUser,
+}: props) {
   const [open, setOpen] = useState(false);
 
   function handleScroll(elementId: string) {
@@ -41,7 +47,7 @@ export default function ResponsiveNav({ scrollIntoView }: props) {
           />
         </Button>
       </DialogTrigger>
-      <DialogContent className="lg:hidden">
+      <DialogContent className="bg-background/75 backdrop-blur-lg  lg:hidden">
         <DialogHeader>
           <DialogTitle className="hidden"></DialogTitle>
           <DialogDescription className="hidden"></DialogDescription>
@@ -70,6 +76,20 @@ export default function ResponsiveNav({ scrollIntoView }: props) {
                 {item.label}
               </li>
             )
+          )}
+
+          {isUser && (
+            <li
+              key={"profile"}
+              className="font-semibold w-full flex items-center justify-center rounded-lg hover:text-indigo-500 hover:bg-muted/30 cursor-pointer transition-all duration-300"
+            >
+              <Link
+                to={"/profile"}
+                className=" w-full h-full flex items-center justify-center py-2 rounded-lg"
+              >
+                Profile
+              </Link>
+            </li>
           )}
         </ul>
       </DialogContent>

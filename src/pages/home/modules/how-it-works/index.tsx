@@ -11,7 +11,39 @@ export function HowItWorksSection() {
       description="Three simple steps to create your perfect resume"
       background="black"
     >
-      <div className="grid gap-8 md:grid-cols-3">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="grid gap-8 md:grid-cols-3"
+      >
+        {steps.map((step, i) => {
+          return (
+            <motion.div
+              key={step.step}
+              viewport={{ once: true }}
+              initial={{ opacity: 0 }}
+              whileInView={{
+                opacity: 1,
+              }}
+              animate={{ y: i % 2 === 0 ? [-20, 15, -20] : [20, -15, 20] }}
+              transition={{
+                y: {
+                  delay: 0,
+                  duration: 3,
+                  ease: "linear",
+                  repeat: Infinity,
+                },
+              }}
+              className="rounded-lg"
+            >
+              <HowItWorksCard step={step} i={i} length={steps.length} />
+            </motion.div>
+          );
+        })}
+      </motion.div>
+
+      {/* <div className="grid gap-8 md:grid-cols-3">
         {steps.map((step, i) => {
           return (
             <motion.div
@@ -37,7 +69,7 @@ export function HowItWorksSection() {
             </motion.div>
           );
         })}
-      </div>
+      </div> */}
     </Section>
   );
 }
