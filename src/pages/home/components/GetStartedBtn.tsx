@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useUser } from "@/lib/store/userState";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -9,10 +10,11 @@ interface props {
 }
 
 export default function GetStartedBtn({ text, className }: props) {
+  const { user } = useUser();
   const navigate = useNavigate();
 
   function handleStart() {
-    const isAuthenticated = true;
+    const isAuthenticated = user !== null;
     return isAuthenticated ? navigate("/build") : navigate("/login");
   }
 

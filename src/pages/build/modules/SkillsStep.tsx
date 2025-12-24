@@ -52,6 +52,7 @@ export default function SkillsStep() {
               <Label htmlFor="softSkills" className="font-semibold mb-2">
                 Soft Skills
               </Label>
+
               <Input
                 disabled={data.skills.soft.length >= 6}
                 value={softSkill}
@@ -68,6 +69,9 @@ export default function SkillsStep() {
                 onClick={() => handleAdd("soft")}
               />
             </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Min 3 required. You can add up to 6 soft skills.
+            </p>
             <Skills
               onRemove={(skill: string) => handleRemoveSkill("soft", skill)}
               skills={data.skills.soft}
@@ -95,6 +99,9 @@ export default function SkillsStep() {
                 onClick={() => handleAdd("languages")}
               />
             </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Min 1 required. You can add up to 6 languages.
+            </p>
             <Skills
               onRemove={(skill: string) =>
                 handleRemoveSkill("languages", skill)
@@ -124,6 +131,9 @@ export default function SkillsStep() {
                 onClick={() => handleAdd("technical")}
               />
             </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Min 3 required. You can add up to 6 technical skills.
+            </p>
             <Skills
               onRemove={(skill: string) =>
                 handleRemoveSkill("technical", skill)

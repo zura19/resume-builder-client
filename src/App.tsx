@@ -10,39 +10,45 @@ import NotFound from "./pages/notFound";
 import LightRaysLayout from "./layouts/lightRays";
 import Profile from "./pages/profile";
 import { useUser } from "./lib/store/userState";
-import { Suspense } from "react";
 
 function App() {
   const { user } = useUser();
 
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<p>about</p>} />
-          </Route>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<p>about</p>} />
+        </Route>
 
-          <Route element={<SecondaryLayout />}>
-            <Route path="/build" element={<BuildResume />} />\
-            <Route
-              path="/login"
-              element={user ? <Navigate to="/" /> : <Login />}
-            />
-            <Route path="/signup" element={<Signup />} />
-          </Route>
+        <Route element={<SecondaryLayout />}>
+          <Route
+            path="/build"
+            element={user ? <BuildResume /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={user ? <Navigate to="/" /> : <Login />}
+          />
+          <Route
+            path="/signup"
+            element={user ? <Navigate to="/" /> : <Signup />}
+          />
+        </Route>
 
-          <Route element={<LightRaysLayout />}>
-            <Route path="/resume/:id" element={<Resume />} />
-            <Route
-              path="/profile"
-              element={user ? <Profile /> : <Navigate to="/login" />}
-            />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </Suspense>
+        <Route element={<LightRaysLayout />}>
+          <Route
+            path="/resume/:id"
+            element={user ? <Resume /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/profile"
+            element={user ? <Profile /> : <Navigate to="/login" />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

@@ -1,12 +1,31 @@
 import { motion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Logo from "../../../components/shared/Logo";
-// import { MenuIcon } from "lucide-react";
-// import { Button } from "@/components/ui/button";
-import { navbarData } from "@/constants/navbar/navbar";
+import Logo from "@/components/shared/Logo";
+import { navbarData as data } from "@/constants/navbar/navbar";
 import ResponsiveNav from "./ResponsiveNav";
+import { useMemo } from "react";
+import { useUser } from "@/lib/store/userState";
+import UserAvatar from "@/components/shared/UserAvatar";
+
+// export function calcDate(a: Date, dayDifference: number) {
+//   const now = new Date();
+
+//   const nowYear = now.getUTCFullYear();
+//   const nowMonth = now.getUTCMonth();
+//   const nowDate = now.getUTCDate();
+
+//   const year = a.getUTCFullYear();
+//   const month = a.getUTCMonth();
+//   const date = a.getUTCDate();
+
+//   if (nowYear > year || nowMonth > month) return true;
+//   if (nowDate - date >= dayDifference) return true;
+
+//   return false;
+// }
 
 export default function Navbar() {
+  const { user } = useUser();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -21,6 +40,14 @@ export default function Navbar() {
       element.scrollIntoView({ behavior: "smooth" });
     }
   }
+
+  const navbarData = useMemo(() => {
+    if (user) {
+      return data.filter((item) => item.label !== "Login");
+    }
+
+    return data;
+  }, [user]);
 
   return (
     <motion.nav
@@ -50,6 +77,8 @@ export default function Navbar() {
             </li>
           )
         )}
+
+        {user && <UserAvatar goto="/profile" />}
       </ul>
 
       <ResponsiveNav scrollIntoView={scrollIntoView} />

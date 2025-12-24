@@ -6,10 +6,24 @@ import ExperienceStep from "./modules/ExperienceStep";
 import SkillsStep from "./modules/SkillsStep";
 import ProjectsStep from "./modules/ProjectsStep";
 import ChooseResumeTypeStep from "./modules/ChooseResumeTypeStep";
+import { useQuery } from "@tanstack/react-query";
+import { canGenerateService } from "@/lib/services/resume/canGenerateService";
+import BuildSeketon from "./components/BuildSeketon";
 
 export default function BuildResume() {
   const { step, data } = useBuildResume();
-
+  const {
+    data: can,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["can-generate"],
+    queryFn: async () => await canGenerateService(),
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    enabled: step === 1,
+  });
+  console.log(isLoading);
   console.log(data);
 
   function returnStep() {
@@ -31,9 +45,14 @@ export default function BuildResume() {
 
   return (
     <div className="h-full">
-      <BuildResumeTemplate>
-        <div className="p-9 overflow-scroll ">{returnStep()}</div>
-      </BuildResumeTemplate>
+      {isLoading && <BuildSeketon />}
+      {isError && <p className="text-center">{error.message}</p>}
+
+      {can?.data.canGenerate && (
+        <BuildResumeTemplate>
+          <div className="p-9 overflow-scroll ">{returnStep()}</div>
+        </BuildResumeTemplate>
+      )}
     </div>
   );
 }
