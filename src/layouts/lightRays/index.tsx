@@ -1,11 +1,19 @@
 import LightRays from "@/components/LightRays";
-import { Outlet } from "react-router-dom";
+import Wrapper from "@/components/shared/Wrapper";
+import { Outlet, useLocation } from "react-router-dom";
+import Navbar from "../main/components/Navbar";
+import { cn } from "@/lib/utils";
 
 // interface props {
 // //   children: React.ReactNode;
 // }
 
+const showNavbarRoutes = ["/profile"];
+
 export default function LightRaysLayout() {
+  const location = useLocation();
+  const showNavbar = showNavbarRoutes.includes(location.pathname);
+
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden">
       {/* Background rays */}
@@ -22,9 +30,13 @@ export default function LightRaysLayout() {
           saturation={0.8}
         />
       </div>
-
+      {showNavbar && (
+        <Wrapper className="fixed  inset-x-0 z-40 px-0 sm:px-8 py-0 sm:top-4 rounded-full">
+          <Navbar />
+        </Wrapper>
+      )}
       {/* Content */}
-      <main className="relative z-10 h-full bg-indigo-">
+      <main className={cn("relative z-10 pt-0 h-full", showNavbar && "pt-30")}>
         <Outlet />
       </main>
     </div>

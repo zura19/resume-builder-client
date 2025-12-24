@@ -18,10 +18,13 @@ export default function UserAvatar({ goto, className }: props) {
   }
 
   return (
-    <Avatar onClick={handleGo} className={cn("cursor-pointer", className)}>
-      <AvatarImage src="https://clipart-library.com/8300/2368/User-Profile-PNG-Clipart.png" />
+    <Avatar
+      onClick={handleGo}
+      className={cn("cursor-pointer text-xs", className)}
+    >
+      <AvatarImage src="" />
       {user && (
-        <AvatarFallback>
+        <AvatarFallback className=" font-bold">
           {user?.firstName[0].toUpperCase() + user?.lastName[0].toUpperCase()}
         </AvatarFallback>
       )}

@@ -1,24 +1,44 @@
-import FormButton from "@/components/shared/FormButton";
-import useLogout from "@/lib/hooks/useLogout";
+import { ErrorComponent } from "@/components/shared/ErrorComponents";
+// import FormButton from "@/components/shared/FormButton";
+import Wrapper from "@/components/shared/Wrapper";
+// import useLogout from "@/lib/hooks/useLogout";
+import { getProfileDataService } from "@/lib/services/user/profileDataService";
 import { useUser } from "@/lib/store/userState";
+import { useQuery } from "@tanstack/react-query";
+import { ProfileSkeleton } from "./components/ProfileSkeleton";
+// import UserAvatar from "@/components/shared/UserAvatar";
+// import { Card, CardContent } from "@/components/ui/card";
+import ResumeSection from "./modules/ResumeSection";
+import UserSection from "./modules/UserSection";
+// import { Button } from "@/components/ui/button";
 
 export default function Profile() {
-  const { user } = useUser();
-  const { logOut, isLoggingOut } = useLogout();
+  const { user: logged } = useUser();
+  const { data, isLoading, isError, error, refetch } = useQuery({
+    queryKey: ["user", logged?.id],
+    queryFn: async () => await getProfileDataService(),
+  });
+  // const { logOut, isLoggingOut } = useLogout();
 
-  return (
-    <div className="max-w-4xl mx-auto py-6 space-y-6 px-4">
-      <div>{JSON.stringify(user, null, 2)}</div>
+  if (isError)
+    return (
+      <div className="h-full flex items-center justify-center">
+        <ErrorComponent message={error.message} onRetry={refetch} />
+      </div>
+    );
 
-      <FormButton
-        loading={isLoggingOut}
-        disabled={isLoggingOut}
-        onClick={logOut}
-        type="button"
-        loadingText="Loggin out.."
-      >
-        Log out
-      </FormButton>
-    </div>
-  );
+  const { user, resumes } = data?.data || {};
+
+  if (!isError)
+    return (
+      <Wrapper>
+        {isLoading && <ProfileSkeleton />}
+        {!isLoading && (
+          <div className=" space-y-12">
+            <UserSection user={user} />
+            <ResumeSection resumes={resumes} />
+          </div>
+        )}
+      </Wrapper>
+    );
 }
