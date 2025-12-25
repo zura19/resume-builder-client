@@ -34,14 +34,6 @@ export default function ProjectsSection({ data }: props) {
                   {project.title}
                 </h3>
               </div>
-              {/* <a
-                href={`https://${project.link}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-600 hover:text-cyan-700"
-              >
-                <ExternalLink className="w-4 h-4" />
-              </a> */}
             </div>
 
             <ul className="list-disc list-inside space-y-1 text-[#4b5563] mb-3">
@@ -49,7 +41,6 @@ export default function ProjectsSection({ data }: props) {
                 <li key={i}>{feature}</li>
               ))}
             </ul>
-            {/* <p className="text-gray-600 mb-3">{project.title}</p> */}
 
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech, i) => (

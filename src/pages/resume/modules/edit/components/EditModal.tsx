@@ -21,11 +21,13 @@ export default function EditModal({ resumeData, id }: props) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="w-full rounded-b-none  lg:hidden"
+          size={"sm"}
+          // size={"icon-sm"}
+          className=" rounded-full text-xs sm:text-md  lg:hidden"
           variant={"secondary"}
         >
           Edit Resume
-          <EditIcon />
+          <EditIcon className=" text-3 sm:text-5" />
         </Button>
       </DialogTrigger>
       <DialogContent className=" overflow-scroll max-h-[90vh]  sm:max-w-3xl">
