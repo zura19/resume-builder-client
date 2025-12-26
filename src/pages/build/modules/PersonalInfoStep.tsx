@@ -9,14 +9,19 @@ import {
   type PersonalInfo,
 } from "@/lib/schemas/personalInfoSchema";
 import useBuildResume from "@/lib/store/buildResumeState";
+import { useUser } from "@/lib/store/userState";
 
 export default function PersonalInfoStep() {
+  const { user } = useUser();
   const { nextStep, handlePersonalInfo, data } = useBuildResume();
   const form = useForm<PersonalInfo>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
-      fullName: data.personalInfo.fullName || "",
-      email: data.personalInfo.email || "",
+      fullName:
+        data.personalInfo.fullName ||
+        `${user?.firstName} ${user?.lastName}` ||
+        "",
+      email: data.personalInfo.email || user?.email || "",
       phone: data.personalInfo.phone || "",
       address: data.personalInfo.address || "",
     },
