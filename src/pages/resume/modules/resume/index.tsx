@@ -2,11 +2,13 @@ import type {
   AiGeneratedResume,
   ResumeType,
 } from "@/lib/types/AiGeneratedResume";
-import ResumeClassic from "../../templates/classic";
-import ResumeModern from "../../templates/modern";
-import ResumeCreative from "../../templates/creative";
-import ResumeExecutive from "../../templates/executive";
 import ResumeSkeleton from "./components/ResumeSkeleton";
+import { PDFViewer } from "@react-pdf/renderer";
+import ResumeClassic from "@/pages/resume/templates/classic";
+import ResumeModern from "@/pages/resume/templates/modern";
+import ResumeCreative from "@/pages/resume/templates/creative";
+import ResumeExecutive from "@/pages/resume/templates/executive";
+import EditModal from "../edit/components/EditModal";
 
 interface props {
   type: ResumeType;
@@ -21,13 +23,13 @@ export default function ResumeWrapper({ resume, type, isLoading, id }: props) {
 
     switch (type) {
       case "classic":
-        return <ResumeClassic id={id} resumeData={resume} />;
+        return <ResumeClassic resumeData={resume} />;
       case "modern":
-        return <ResumeModern id={id} resumeData={resume} />;
+        return <ResumeModern resumeData={resume} />;
       case "creative":
-        return <ResumeCreative id={id} resumeData={resume} />;
+        return <ResumeCreative resumeData={resume} />;
       case "executive":
-        return <ResumeExecutive id={id} resumeData={resume} />;
+        return <ResumeExecutive resumeData={resume} />;
       default:
     }
   }
@@ -35,7 +37,16 @@ export default function ResumeWrapper({ resume, type, isLoading, id }: props) {
   return (
     <div className="relative max-h-full overflow-scroll rounded-lg">
       {isLoading && <ResumeSkeleton />}
-      {!isLoading && renderResume()}
+      {!isLoading && (
+        <div className="h-full w-full relative">
+          <PDFViewer width={"100%"} height={"100%"}>
+            {renderResume()}
+          </PDFViewer>
+          <div className=" fixed top-4 right-4 ">
+            <EditModal resumeData={resume} id={id} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

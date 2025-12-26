@@ -1,69 +1,81 @@
-import { Rocket } from "lucide-react";
+import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
+import type { ICreativeColors } from "..";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 interface props {
-  data: {
-    title: string;
-    technologies: string[];
-    features: string[];
-  }[];
+  data: AiGeneratedResume["projects"];
+  colors: ICreativeColors;
 }
 
-// Primary: cyan-500 (#06b6d4)
-// Accent: pink-500 (#ec4899)
-// Background: white (#ffffff)
-// Text: gray-900 (#111827)
-// Secondary Text: gray-600 (#4b5563)
+export default function Projects({ data, colors }: props) {
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: 24,
+    },
+    title: {
+      fontSize: 18,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 16,
+      borderBottom: `4px solid ${colors.primary}`,
+      paddingBottom: 4,
+    },
+    projectItem: {
+      marginBottom: 16,
+      padding: 12,
+      border: `1px solid ${colors.accent}`,
+      borderRadius: 8,
+    },
+    projectTitle: {
+      fontSize: 13,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 8,
+    },
+    feature: {
+      fontSize: 10,
+      color: colors.secondaryText,
+      marginBottom: 4,
+      paddingLeft: 0,
+    },
+    techContainer: {
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 6,
+      marginTop: 8,
+    },
+    techBadge: {
+      backgroundColor: "#06b5d44f",
+      color: colors.secondaryText,
+      borderRadius: 12,
+      padding: "4px 10px",
+      fontSize: 9,
+    },
+  });
 
-export default function ProjectsSection({ data }: props) {
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-[#111827] mb-6 border-b-4 border-[#ec4899] inline-block pb-1">
-        Projects
-      </h2>
-
-      <div className="space-y-6">
-        {data.map((project, index) => (
-          <div
-            key={index}
-            className="border-2 border-[#06b5d47e] rounded-lg p-5 hover:border-[#ec489a82] transition-colors"
-          >
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <Rocket className="w-5 h-5 text-[#ec4899]" />
-                <h3 className="text-lg font-bold text-[#111827]">
-                  {project.title}
-                </h3>
-              </div>
-              {/* <a
-                href={`https://${project.link}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-600 hover:text-cyan-700"
-              >
-                <ExternalLink className="w-4 h-4" />
-              </a> */}
-            </div>
-
-            <ul className="list-disc list-inside space-y-1 text-[#4b5563] mb-3">
-              {project.features.map((feature, i) => (
-                <li key={i}>{feature}</li>
-              ))}
-            </ul>
-            {/* <p className="text-gray-600 mb-3">{project.title}</p> */}
-
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech, i) => (
-                <span
-                  key={i}
-                  className="px-3 py-1 bg-linear-to-r from-[#06b5d44f] to-[#ec489a4e] text-[#4b5563] rounded-full text-sm font-medium"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <View style={styles.container}>
+      <Text style={styles.title}>Projects</Text>
+      {data.map((project, index) => (
+        <View key={index} style={styles.projectItem}>
+          <Text style={styles.projectTitle}>{project.title}</Text>
+          {project.features.map((feature, i) => (
+            <Text key={i} style={styles.feature}>
+              • {feature}
+            </Text>
+          ))}
+          <View style={styles.techContainer}>
+            {project.technologies.map((tech, i) => (
+              <Text key={i} style={styles.techBadge}>
+                {tech}
+              </Text>
+            ))}
+          </View>
+        </View>
+      ))}
+    </View>
   );
 }

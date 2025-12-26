@@ -1,14 +1,35 @@
-interface SummaryProps {
-  text: string;
-}
+import type { ModernColors } from "..";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
-export default function Summary({ text }: SummaryProps) {
+interface props {
+  text: string;
+  colors: ModernColors;
+}
+export default function Summary({ text, colors }: props) {
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: 32,
+    },
+    title: {
+      fontSize: 16,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 16,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+    },
+    text: {
+      fontSize: 11,
+      color: colors.text,
+      lineHeight: 1.6,
+    },
+  });
+
   return (
-    <section className="mb-8">
-      <h2 className="text-2xl font-bold  mb-4 uppercase tracking-wide">
-        Professional Summary
-      </h2>
-      <p className=" leading-relaxed text-pretty">{text}</p>
-    </section>
+    <View style={styles.container}>
+      <Text style={styles.title}>PROFESSIONAL SUMMARY</Text>
+      <Text style={styles.text}>{text}</Text>
+    </View>
   );
 }

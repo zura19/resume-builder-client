@@ -1,62 +1,62 @@
-import PersonalInfo from "./components/Personalnfo";
-import Summary from "./components/Summary";
-import Education from "./components/Education";
-import Experience from "./components/Experience";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
-import useResume from "@/lib/hooks/useResume";
-import { Button } from "@/components/ui/button";
-import { FileDown } from "lucide-react";
-import EditModal from "../../modules/edit/components/EditModal";
+import { Document, Page, StyleSheet } from "@react-pdf/renderer";
+import Summary from "./components/Summary";
+import PersonalInfo from "./components/PersonalInfo";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Education from "./components/Education";
+import Skills from "./components/Skills";
 
-// forground - #1a1a1a
-// primary - #2c5f8d
-// muted -  #6d6d6d
-// border - #e5e7eb
-// accent - #f9fafb
+export interface ModernColors {
+  primary: string;
+  primaryLight: string;
+  primaryBorder: string;
+  background: string;
+  border: string;
+  text: string;
+  textSecondary: string;
+  textTertiary: string;
+  white: string;
+}
+
+const colors: ModernColors = {
+  primary: "#2c5f8d", // Blue accent
+  primaryLight: "#2c608d1d", // Very light blue background
+  primaryBorder: "#2c608d2f", // Light blue border
+  background: "#f9fafb", // Light gray background
+  border: "#e5e7eb", // Light border
+  text: "#1a1a1a", // Very dark text
+  textSecondary: "#6b7280", // Medium gray
+  textTertiary: "#6d6d6d", // Dark gray
+  white: "#ffffff",
+};
 
 interface props {
   resumeData: AiGeneratedResume;
-  isTemplate?: boolean;
-  id: string;
 }
 
-export default function ResumeModern({
-  resumeData,
-  isTemplate = false,
-  id,
-}: props) {
-  const { targetRef, handleDownload } = useResume();
-
-  const { personalInfo, summary, skills, education, experience, projects } =
-    resumeData;
-  //   const dummyData = resumeData;
-
+export default function ResumeModern({ resumeData }: props) {
+  const styles = StyleSheet.create({
+    page: {
+      backgroundColor: colors.background,
+      fontFamily: "Helvetica",
+      padding: 48,
+    },
+    viewer: {
+      width: "100%",
+      height: "100vh",
+    },
+  });
   return (
-    <div className={`relative max-h-full py-0 overflow-scroll rounded-lg`}>
-      {!isTemplate && (
-        <div className="sticky top-0 w-full  left-full  rounded-none flex flex-col items-center">
-          <EditModal id={id} resumeData={resumeData} />
-
-          <Button className="w-full rounded-none" onClick={handleDownload}>
-            Download PDF
-            <FileDown />
-          </Button>
-        </div>
-      )}
-
-      <div
-        ref={targetRef}
-        className="max-w-full mx-auto p-8 md:p-12 text-[#1a1a1a] bg-[#f9fafb]"
-      >
-        <PersonalInfo data={personalInfo} />
-        <Summary text={summary} />
-        <Experience data={experience} />
-        <Education data={education} />
-        <Skills data={skills} />
-        <Projects data={projects} />
-      </div>
-    </div>
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <PersonalInfo colors={colors} data={resumeData.personalInfo} />
+        <Summary colors={colors} text={resumeData.summary} />
+        <Experience colors={colors} data={resumeData.experience} />
+        <Education colors={colors} data={resumeData.education} />
+        <Skills colors={colors} data={resumeData.skills} />
+        <Projects colors={colors} data={resumeData.projects} />
+      </Page>
+    </Document>
   );
 }

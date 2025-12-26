@@ -1,34 +1,65 @@
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
+import type { ClassicColors } from "..";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 interface props {
-  education: AiGeneratedResume["education"];
+  data: AiGeneratedResume["education"];
+  colors: ClassicColors;
 }
 
-export default function EducationSection({ education }: props) {
+export default function Education({ data, colors }: props) {
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: 32,
+    },
+    title: {
+      fontSize: 14,
+      fontWeight: "bold",
+      fontFamily: "Times-Bold",
+      color: colors.black,
+      paddingBottom: 8,
+      marginBottom: 16,
+      borderBottom: `2px solid ${colors.black}`,
+    },
+    educationItem: {
+      marginBottom: 16,
+    },
+    header: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 8,
+    },
+    university: {
+      fontSize: 12,
+      fontFamily: "Times-Bold",
+      color: colors.black,
+    },
+    dates: {
+      fontSize: 10,
+      color: colors.black,
+    },
+    degree: {
+      fontSize: 10,
+      color: colors.black,
+    },
+  });
+
   return (
-    <div>
-      <h3
-        style={{ borderBottom: "2px solid black" }}
-        // style={{ color: "black" }}
-        className="text-xl font-bold pb-2 border-b-2 mb-2"
-      >
-        Education
-      </h3>
-      <ul className="space-y-4">
-        {education.map((item, i) => (
-          <div key={i} className="space-y-2">
-            <div className="flex items-center justify-between">
-              <p className="text-lg font-medium">{item.university}</p>
-              <p>
-                <span>{item.startDate}</span>
-                <span> - </span>
-                <span>{item.endDate || "Present"}</span>
-              </p>
-            </div>
-            <p>Degree: {item.degree}</p>
-          </div>
-        ))}
-      </ul>
-    </div>
+    <View wrap={false} style={styles.container}>
+      <Text style={styles.title}>Education</Text>
+      {data.map((edu, index) => (
+        <View key={index} style={styles.educationItem}>
+          <View style={styles.header}>
+            <Text style={styles.university}>{edu.university}</Text>
+            <Text style={styles.dates}>
+              {edu.startDate} - {edu.stillStudying ? "Present" : edu.endDate}
+            </Text>
+          </View>
+          <Text style={styles.degree}>Degree: {edu.degree}</Text>
+        </View>
+      ))}
+    </View>
   );
 }

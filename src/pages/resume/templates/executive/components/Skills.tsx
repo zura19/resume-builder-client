@@ -1,63 +1,119 @@
-import type { Skills } from "@/lib/types/buildResumeTypes";
-import { Users, Cpu, TrendingUp } from "lucide-react";
+import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
+import type { ExecutiveColors } from "..";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 interface props {
-  data: Skills;
+  data: AiGeneratedResume["skills"];
+  colors: ExecutiveColors;
 }
 
-export default function SkillsSection({ data }: props) {
+export default function Skills({ data, colors }: props) {
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: 32,
+    },
+    title: {
+      fontSize: 16,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 24,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+      borderBottom: `2px solid ${colors.border}`,
+      paddingBottom: 8,
+    },
+    skillsGrid: {
+      display: "flex",
+      flexDirection: "row",
+      gap: 32,
+    },
+    skillCategory: {
+      flex: 1,
+    },
+    categoryHeader: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      marginBottom: 16,
+      paddingBottom: 12,
+      borderBottom: `2px solid ${colors.accent}`,
+    },
+    categoryIcon: {
+      fontSize: 16,
+      color: colors.accent,
+    },
+    categoryTitle: {
+      fontSize: 12,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+    },
+    skillItem: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "flex-start",
+      gap: 8,
+      marginBottom: 8,
+    },
+    skillBullet: {
+      color: colors.accent,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      fontSize: 12,
+      marginTop: 2,
+    },
+    skillText: {
+      fontSize: 10,
+      color: colors.textTertiary,
+      flex: 1,
+    },
+  });
+
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-[#0f172a] mb-6 uppercase tracking-wide border-b-2 border-[#d1fae5] pb-2">
-        Core Competencies
-      </h2>
+    <View style={styles.container}>
+      <Text style={styles.title}>CORE COMPETENCIES</Text>
+      <View style={styles.skillsGrid}>
+        <View style={styles.skillCategory}>
+          <View style={styles.categoryHeader}>
+            {/* <Text style={styles.categoryIcon}>👥</Text> */}
+            <Text style={styles.categoryTitle}>Soft Skills</Text>
+          </View>
+          {data.soft.map((skill, i) => (
+            <View key={i} style={styles.skillItem}>
+              <Text style={styles.skillBullet}>▪</Text>
+              <Text style={styles.skillText}>{skill}</Text>
+            </View>
+          ))}
+        </View>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <div className="flex items-center gap-3 mb-4 pb-3 border-b-2 border-[#10b981]">
-            <Users className="w-6 h-6 text-[#10b981]" />
-            <h3 className="text-lg font-bold text-[#0f172a]">Soft Skills</h3>
-          </div>
-          <ul className="space-y-2">
-            {data.soft.map((skill, i) => (
-              <li key={i} className="flex items-start gap-2 text-[#475569]">
-                <span className="text-[#10b981] font-bold mt-1">▪</span>
-                <span>{skill}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <View style={styles.skillCategory}>
+          <View style={styles.categoryHeader}>
+            {/* <Text style={styles.categoryIcon}>💻</Text> */}
+            <Text style={styles.categoryTitle}>Technical</Text>
+          </View>
+          {data.technical.map((skill, i) => (
+            <View key={i} style={styles.skillItem}>
+              <Text style={styles.skillBullet}>▪</Text>
+              <Text style={styles.skillText}>{skill}</Text>
+            </View>
+          ))}
+        </View>
 
-        <div>
-          <div className="flex items-center gap-3 mb-4 pb-3 border-b-2 border-[#10b981]">
-            <Cpu className="w-6 h-6 text-[#10b981]" />
-            <h3 className="text-lg font-bold text-[#0f172a]">Technical</h3>
-          </div>
-          <ul className="space-y-2">
-            {data.technical.map((skill, i) => (
-              <li key={i} className="flex items-start gap-2 text-[#475569]">
-                <span className="text-[#10b981] font-bold mt-1">▪</span>
-                <span>{skill}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <div className="flex items-center gap-3 mb-4 pb-3 border-b-2 border-[#10b981]">
-            <TrendingUp className="w-6 h-6 text-[#10b981]" />
-            <h3 className="text-lg font-bold text-[#0f172a]">Languages</h3>
-          </div>
-          <ul className="space-y-2">
-            {data.languages.map((skill, i) => (
-              <li key={i} className="flex items-start gap-2 text-[#475569]">
-                <span className="text-[#10b981] font-bold mt-1">▪</span>
-                <span>{skill}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
+        <View style={styles.skillCategory}>
+          <View style={styles.categoryHeader}>
+            {/* <Text style={styles.categoryIcon}>📈</Text> */}
+            <Text style={styles.categoryTitle}>Languages</Text>
+          </View>
+          {data.languages.map((skill, i) => (
+            <View key={i} style={styles.skillItem}>
+              <Text style={styles.skillBullet}>▪</Text>
+              <Text style={styles.skillText}>{skill}</Text>
+            </View>
+          ))}
+        </View>
+      </View>
+    </View>
   );
 }

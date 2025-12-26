@@ -1,51 +1,51 @@
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
-import type { ClassicColors } from "..";
+import type { ModernColors } from "..";
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 interface props {
   data: AiGeneratedResume["personalInfo"];
-  colors: ClassicColors;
+  colors: ModernColors;
 }
 
 export default function PersonalInfo({ data, colors }: props) {
   const styles = StyleSheet.create({
     container: {
       marginBottom: 32,
+      paddingBottom: 32,
+      borderBottom: `2px solid ${colors.border}`,
     },
     name: {
-      fontSize: 28,
+      fontSize: 32,
       fontWeight: "bold",
-      fontFamily: "Times-Bold",
-      textAlign: "center",
-      letterSpacing: 3,
-      color: colors.black,
+      fontFamily: "Helvetica-Bold",
       marginBottom: 12,
+      color: colors.text,
     },
-    contactContainer: {
+    contactLine: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      maxWidth: "70%",
-      marginHorizontal: "auto",
+      flexWrap: "wrap",
+      gap: 16,
       fontSize: 10,
+      color: colors.textSecondary,
     },
     contactItem: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      gap: 12,
-      color: colors.black,
+      color: colors.textSecondary,
+    },
+    separator: {
+      color: colors.textSecondary,
     },
   });
 
   return (
-    <View wrap={false} style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.name}>{data.fullName}</Text>
-      <View style={styles.contactContainer}>
-        <Text style={styles.contactItem}>{data.address}</Text>
+      <View style={styles.contactLine}>
         <Text style={styles.contactItem}>{data.email}</Text>
+        <Text style={styles.separator}>•</Text>
         <Text style={styles.contactItem}>{data.phone}</Text>
+        <Text style={styles.separator}>•</Text>
+        <Text style={styles.contactItem}>{data.address}</Text>
       </View>
     </View>
   );
