@@ -8,6 +8,7 @@ import type {
   Project,
 } from "../types/buildResumeTypes";
 import type { ResumeType } from "../types/AiGeneratedResume";
+import { toast } from "sonner";
 
 interface ResumeState {
   step: number;
@@ -95,6 +96,7 @@ const useBuildResume = create<ResumeStore>((set, get) => ({
     const state = get().data;
 
     if (state.skills[type].includes(skill)) {
+      toast.error("Skill already added");
       return;
     }
 
