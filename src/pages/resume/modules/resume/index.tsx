@@ -2,16 +2,12 @@ import type {
   AiGeneratedResume,
   ResumeType,
 } from "@/lib/types/AiGeneratedResume";
-// import ResumeClassic from "../../templates/classic";
-// import ResumeModern from "../../templates/modern";
-// import ResumeCreative from "../../templates/creative";
-// import ResumeExecutive from "../../templates/executive";
 import ResumeSkeleton from "./components/ResumeSkeleton";
 import { PDFViewer } from "@react-pdf/renderer";
-import ResumeCreative from "../../templates/pdf/creative";
-import ResumeExecutive from "../../templates/pdf/executive";
-import ResumeModern from "../../templates/pdf/modern";
-import ResumeClassic from "../../templates/pdf/classic";
+import ResumeClassic from "@/pages/resume/templates/classic";
+import ResumeModern from "@/pages/resume/templates/modern";
+import ResumeCreative from "@/pages/resume/templates/creative";
+import ResumeExecutive from "@/pages/resume/templates/executive";
 import EditModal from "../edit/components/EditModal";
 
 interface props {
@@ -32,7 +28,6 @@ export default function ResumeWrapper({ resume, type, isLoading, id }: props) {
         return <ResumeModern resumeData={resume} />;
       case "creative":
         return <ResumeCreative resumeData={resume} />;
-      // return <ResumeCreative id={id} resumeData={resume} />;
       case "executive":
         return <ResumeExecutive resumeData={resume} />;
       default:

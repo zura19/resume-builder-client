@@ -1,45 +1,95 @@
+import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
+import type { ModernColors } from "..";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
+
 interface props {
-  data: {
-    company: string;
-    position: string;
-    responsibilities: string[];
-    startDate: string;
-    endDate?: string;
-  }[];
+  data: AiGeneratedResume["experience"];
+  colors: ModernColors;
 }
 
-export default function Experience({ data }: props) {
+export default function Experience({ data, colors }: props) {
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: 32,
+    },
+    title: {
+      fontSize: 16,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 16,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+    },
+    experienceItem: {
+      marginBottom: 24,
+      paddingLeft: 16,
+      borderLeft: `4px solid ${colors.primary}`,
+    },
+    header: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginBottom: 12,
+    },
+    leftHeader: {
+      flex: 1,
+    },
+    position: {
+      fontSize: 12,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 4,
+    },
+    company: {
+      fontSize: 11,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+    },
+    dates: {
+      fontSize: 10,
+      color: colors.textTertiary,
+      whiteSpace: "nowrap",
+    },
+    responsibility: {
+      fontSize: 10,
+      color: colors.text,
+      marginBottom: 8,
+      display: "flex",
+      flexDirection: "row",
+      lineHeight: 1.5,
+    },
+    bullet: {
+      color: colors.primary,
+      marginRight: 8,
+      marginTop: 2,
+    },
+  });
+
   return (
-    <section className="mb-8">
-      <h2 className="text-2xl font-bold mb-4 uppercase tracking-wide">
-        Work Experience
-      </h2>
-      <div className="space-y-6">
-        {data.map((exp, index) => (
-          <div key={index} className="border-l-4 border-[#2c5f8d] pl-4">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 mb-3">
-              <div>
-                <h3 className="text-lg font-bold">{exp.position}</h3>
-                <p className=" font-medium">{exp.company}</p>
-              </div>
-              <span className="text-sm text-[#6d6d6d] whitespace-nowrap">
-                {exp.startDate} - {exp.endDate || "Present"}
-              </span>
-            </div>
-            <ul className="space-y-2">
-              {exp.responsibilities.map((resp, idx) => (
-                <li
-                  key={idx}
-                  className=" leading-relaxed flex gap-2 text-pretty"
-                >
-                  <span className="text-[#2c5f8d] mt-1.5 shrink-0">•</span>
-                  <span>{resp}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
+    <View style={styles.container}>
+      <Text style={styles.title}>WORK EXPERIENCE</Text>
+      {data.map((exp, index) => (
+        <View key={index} style={styles.experienceItem}>
+          <View style={styles.header}>
+            <View style={styles.leftHeader}>
+              <Text style={styles.position}>{exp.position}</Text>
+              <Text style={styles.company}>{exp.company}</Text>
+            </View>
+            <Text style={styles.dates}>
+              {exp.startDate} - {exp.endDate || "Present"}
+            </Text>
+          </View>
+          {exp.responsibilities.map((resp, idx) => (
+            <View key={idx} style={styles.responsibility}>
+              <Text style={styles.bullet}>•</Text>
+              <Text style={{ flex: 1 }}>{resp}</Text>
+            </View>
+          ))}
+        </View>
+      ))}
+    </View>
   );
 }

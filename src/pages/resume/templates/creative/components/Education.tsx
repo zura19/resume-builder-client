@@ -1,46 +1,65 @@
-import { GraduationCap } from "lucide-react";
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
-
-// Primary: cyan-500 (#06b6d4)
-// Accent: pink-500 (#ec4899)
-// Background: white (#ffffff)
-// Text: gray-900 (#111827)
-// Secondary Text: gray-600 (#4b5563)
+import type { ICreativeColors } from "..";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 interface props {
   data: AiGeneratedResume["education"];
+  colors: ICreativeColors;
 }
+export default function Education({ data, colors }: props) {
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: 24,
+    },
+    title: {
+      fontSize: 18,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 16,
+      borderBottom: `4px solid ${colors.primary}`,
+      paddingBottom: 4,
+    },
+    educationItem: {
+      marginBottom: 12,
+      padding: 16,
+      backgroundColor: "#06b5d418",
+      borderRadius: 8,
+    },
+    degree: {
+      fontSize: 12,
+      fontWeight: "",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 4,
+    },
+    university: {
+      fontSize: 11,
+      fontWeight: "semiBold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 4,
+    },
+    dates: {
+      fontSize: 10,
+      color: colors.secondaryText,
+    },
+  });
 
-export default function EducationSection({ data }: props) {
   return (
-    <div>
-      <h2 className="text-2xl font-bold  mb-6 border-b-4 border-[#06b6d4] inline-block pb-1">
-        Education
-      </h2>
-
-      <div className="space-y-4">
-        {data.map((edu, index) => (
-          <div
-            key={index}
-            className="bg-linear-to-r from-[#06b5d418] to-[#ec489a27] p-6 rounded-lg"
-          >
-            <div className="flex items-start gap-3">
-              <GraduationCap className="w-6 h-6 text-[#06b6d4] mt-1" />
-              <div className="flex-1">
-                <h3 className="text-lg font-bold">
-                  {edu.degree} in {edu.fieldOfStudy}
-                </h3>
-                <p className="font-semibold">{edu.university}</p>
-                <div className="flex flex-wrap gap-2 text-sm text-[#4b5563] mt-1">
-                  <span>
-                    {edu.startDate} - {edu.stillStudying ? "Now" : edu.endDate}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <View style={styles.container}>
+      <Text style={styles.title}>Education</Text>
+      {data.map((edu, index) => (
+        <View key={index} style={styles.educationItem}>
+          <Text style={styles.degree}>
+            {edu.degree} in {edu.fieldOfStudy}
+          </Text>
+          <Text style={styles.university}>{edu.university}</Text>
+          <Text style={styles.dates}>
+            {edu.startDate} - {edu.stillStudying ? "Now" : edu.endDate}
+          </Text>
+        </View>
+      ))}
+    </View>
   );
 }

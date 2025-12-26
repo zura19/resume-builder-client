@@ -100,7 +100,3 @@ export default function Edit({
     </div>
   );
 }
-
-// function Item(){
-
-// }

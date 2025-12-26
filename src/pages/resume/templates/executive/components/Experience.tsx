@@ -1,51 +1,91 @@
-import { Building2 } from "lucide-react";
+import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
+import type { ExecutiveColors } from "..";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 interface props {
-  data: {
-    company: string;
-    position: string;
-    responsibilities: string[];
-    startDate: string;
-    endDate?: string;
-  }[];
+  data: AiGeneratedResume["experience"];
+  colors: ExecutiveColors;
 }
 
-export default function ExperienceSection({ data }: props) {
+export default function Experience({ data, colors }: props) {
+  const styles = StyleSheet.create({
+    container: {
+      // marginBottom: 32,
+    },
+    title: {
+      fontSize: 16,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 24,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+      borderBottom: `2px solid ${colors.border}`,
+      paddingBottom: 8,
+    },
+    experienceItem: {
+      marginBottom: 32,
+      paddingLeft: 24,
+      borderLeft: `2px solid ${colors.border}`,
+    },
+    position: {
+      fontSize: 14,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 4,
+    },
+    companyLine: {
+      fontSize: 10,
+      color: colors.textSecondary,
+      marginTop: 4,
+      marginBottom: 4,
+    },
+    company: {
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+    },
+    dates: {
+      fontSize: 9,
+      color: colors.textLight,
+      marginBottom: 12,
+    },
+    responsibility: {
+      fontSize: 10,
+      color: colors.textTertiary,
+      marginBottom: 8,
+      paddingLeft: 16,
+      display: "flex",
+      flexDirection: "row",
+    },
+    bullet: {
+      color: colors.accent,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      marginRight: 8,
+    },
+  });
+
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-[#0f172a] mb-6 uppercase tracking-wide border-b-2 border-[#d1fae5] pb-2">
-        Professional Experience
-      </h2>
-
-      <div className="space-y-8">
-        {data.map((exp, index) => (
-          <div key={index} className="border-l-2 border-[#d1fae5] pl-6">
-            <div className="mb-3">
-              <h3 className="text-xl font-bold text-[#0f172a]">
-                {exp.position}
-              </h3>
-              <div className="flex items-center gap-2 text-[#334155] mt-1">
-                <Building2 className="w-4 h-4 text-[#10b981]" />
-                <span className="font-semibold">{exp.company}</span>
-                <span className="text-[#cbd5e1]">|</span>
-                <span>{exp.position}</span>
-              </div>
-              <p className="text-sm text-[#64748b] mt-1">
-                {exp.startDate} - {exp.endDate || "Present"}
-              </p>
-            </div>
-
-            <ul className="space-y-2 text-[#475569]">
-              {exp.responsibilities.map((item, i) => (
-                <li key={i} className="flex gap-3">
-                  <span className="text-[#10b981] font-bold">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
+    <View style={styles.container}>
+      <Text style={styles.title}>PROFESSIONAL EXPERIENCE</Text>
+      {data.map((exp, index) => (
+        <View key={index} style={styles.experienceItem}>
+          <Text style={styles.position}>{exp.position}</Text>
+          <Text style={styles.companyLine}>
+            <Text style={styles.company}>{exp.company}</Text> | {exp.position}
+          </Text>
+          <Text style={styles.dates}>
+            {exp.startDate} - {exp.endDate || "Present"}
+          </Text>
+          {exp.responsibilities.map((item, i) => (
+            <View key={i} style={styles.responsibility}>
+              <Text style={styles.bullet}>•</Text>
+              <Text style={{ flex: 1 }}>{item}</Text>
+            </View>
+          ))}
+        </View>
+      ))}
+    </View>
   );
 }

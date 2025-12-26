@@ -1,63 +1,72 @@
-// Colors used:
-// Primary: #10b981
-// Secondary: #0d9488
-// Background: #ffffff
-// Text: #0f172a
-// Secondary Text: #475569
-// Borders: #d1fae5
-// Accent Background: #ecfdf5
-
-import { Button } from "@/components/ui/button";
-import useResume from "@/lib/hooks/useResume";
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
-import { FileDown } from "lucide-react";
-
-import Education from "./components/Education";
-import Experience from "./components/Experience";
-import PersonalInfo from "./components/PersonalInfo";
-import Projects from "./components/Projects";
-import Skills from "./components/Skills";
+import { Document, Page, View, StyleSheet } from "@react-pdf/renderer";
 import Summary from "./components/Summary";
-import EditModal from "../../modules/edit/components/EditModal";
+import PersonalInfo from "./components/PersonalInfo";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Education from "./components/Education";
+import Skills from "./components/Skills";
+
+export interface ExecutiveColors {
+  primary: string;
+  accent: string;
+  accentLight: string;
+  backgroundLight: string;
+  border: string;
+  borderAccent: string;
+  text: string;
+  textSecondary: string;
+  textTertiary: string;
+  textLight: string;
+  divider: string;
+  white: string;
+}
+
+const colors: ExecutiveColors = {
+  primary: "#0d9488", // Main teal
+  accent: "#10b981", // Green accent
+  accentLight: "#6ee7b7", // Light green
+  backgroundLight: "#ecfdf5", // Very light green
+  border: "#d1fae5", // Light border
+  borderAccent: "#a7f3d0", // Medium border
+  text: "#0f172a", // Very dark text
+  textSecondary: "#334155", // Dark gray
+  textTertiary: "#475569", // Medium gray
+  textLight: "#64748b", // Light gray
+  divider: "#cbd5e1", // Divider
+  white: "#ffffff",
+};
 
 interface props {
   resumeData: AiGeneratedResume;
-  isTemplate?: boolean;
-  id: string;
 }
 
-export default function ResumeExecutive({
-  resumeData,
-  isTemplate = false,
-  id,
-}: props) {
-  const { targetRef, handleDownload } = useResume();
-  const { personalInfo, summary, experience, projects, education, skills } =
-    resumeData;
+export default function ResumeExecutive({ resumeData }: props) {
+  const styles = StyleSheet.create({
+    page: {
+      backgroundColor: colors.white,
+      fontFamily: "Helvetica",
+    },
+    viewer: {
+      width: "100%",
+      height: "100vh",
+    },
+  });
   return (
-    <div className={`relative max-h-full py-0 overflow-scroll rounded-lg`}>
-      {!isTemplate && (
-        <div className="sticky top-0 w-full  left-full  rounded-none flex flex-col items-center">
-          <EditModal id={id} resumeData={resumeData} />
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <PersonalInfo colors={colors} data={resumeData.personalInfo} />
+        <View style={{ padding: 40 }}>
+          <Summary colors={colors} text={resumeData.summary} />
+          <Experience colors={colors} data={resumeData.experience} />
+          <Projects colors={colors} data={resumeData.projects} />
+          {/* <View style={{ marginTop: "24px" }}> */}
+          {/* </View> */}
+          <Education colors={colors} data={resumeData.education} />
 
-          <Button className="w-full rounded-none" onClick={handleDownload}>
-            Download PDF
-            <FileDown />
-          </Button>
-        </div>
-      )}
-
-      <div ref={targetRef} className="bg-[#ffffff] shadow-xl">
-        <PersonalInfo data={personalInfo} />
-
-        <div className="p-10 space-y-8">
-          <Summary text={summary} />
-          <Experience data={experience} />
-          <Projects data={projects} />
-          <Education data={education} />
-          <Skills data={skills} />
-        </div>
-      </div>
-    </div>
+          <Skills colors={colors} data={resumeData.skills} />
+        </View>
+      </Page>
+    </Document>
   );
 }

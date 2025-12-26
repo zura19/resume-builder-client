@@ -1,44 +1,93 @@
 import type { AiGeneratedResume } from "@/lib/types/AiGeneratedResume";
-import { GraduationCap } from "lucide-react";
+import type { ExecutiveColors } from "..";
+import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 interface props {
   data: AiGeneratedResume["education"];
+  colors: ExecutiveColors;
 }
 
-export default function EducationSection({ data }: props) {
-  return (
-    <div>
-      <h2 className="text-2xl font-bold text-[#0f172a] mb-6 uppercase tracking-wide border-b-2 border-[#d1fae5] pb-2">
-        Education
-      </h2>
+export default function Education({ data, colors }: props) {
+  const styles = StyleSheet.create({
+    container: {
+      marginBottom: 32,
+    },
+    title: {
+      fontSize: 16,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 24,
+      textTransform: "uppercase",
+      letterSpacing: 1,
+      borderBottom: `2px solid ${colors.border}`,
+      paddingBottom: 8,
+    },
+    educationItem: {
+      marginBottom: 24,
+      display: "flex",
+      flexDirection: "row",
+      gap: 16,
+    },
+    iconCircle: {
+      width: 48,
+      height: 48,
+      backgroundColor: colors.accent,
+      borderRadius: 24,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    icon: {
+      fontSize: 20,
+      color: colors.white,
+    },
+    content: {
+      flex: 1,
+    },
+    degree: {
+      fontSize: 12,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      color: colors.text,
+      marginBottom: 4,
+    },
+    field: {
+      fontSize: 11,
+      color: colors.textSecondary,
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      marginBottom: 4,
+    },
+    university: {
+      fontSize: 10,
+      color: colors.textTertiary,
+      marginBottom: 4,
+    },
+    dates: {
+      fontSize: 9,
+      color: colors.textLight,
+    },
+  });
 
-      <div className="space-y-6">
-        {data.map((edu, index) => (
-          <div key={index} className="flex gap-4">
-            <div className="shrink-0">
-              <div className="w-12 h-12 bg-[#10b981] rounded-full flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-[#ffffff]" />
-              </div>
-            </div>
-            <div className="flex-1">
-              <h3 className="text-lg font-bold text-[#0f172a]">{edu.degree}</h3>
-              <p className="text-[#334155] font-semibold">{edu.fieldOfStudy}</p>
-              <p className="text-[#475569]">{edu.university}</p>
-              <div className="flex gap-3 text-sm text-[#64748b] mt-1">
-                {/* <span>{edu.}</span> */}
-                {/* <span>•</span> */}
-                <span>{edu.startDate}</span>
-                <span> - </span>
-                <span>{edu.stillStudying ? "Present" : edu.endDate}</span>
-                {/* <span>•</span> */}
-                {/* <span className="text-[#059669] font-semibold">
-                  GPA: {edu.gpa}
-                </span> */}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>EDUCATION</Text>
+      {data.map((edu, index) => (
+        <View key={index} style={styles.educationItem}>
+          <View style={styles.iconCircle}>
+            {/* <Text style={styles.icon}>🎓</Text> */}
+          </View>
+          <View style={styles.content}>
+            <Text style={styles.degree}>{edu.degree}</Text>
+            <Text style={styles.field}>{edu.fieldOfStudy}</Text>
+            <Text style={styles.university}>{edu.university}</Text>
+            <Text style={styles.dates}>
+              {edu.startDate} - {edu.stillStudying ? "Present" : edu.endDate}
+            </Text>
+          </View>
+        </View>
+      ))}
+    </View>
   );
 }
