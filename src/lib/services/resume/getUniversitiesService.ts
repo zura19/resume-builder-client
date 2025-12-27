@@ -1,3 +1,6 @@
+import type { PromiseResponseSuccess } from "@/lib/types/requestResponseTypes";
+import { API } from "../helpers";
+
 interface res {
   country: string;
   name: string;
@@ -6,10 +9,13 @@ interface res {
   state_province: string;
 }
 
-export async function getUniversities(q: string): Promise<res[]> {
+export async function getUniversities(
+  q: string
+): PromiseResponseSuccess<{ universities: res[] }> {
   try {
     const res = await fetch(
-      `https://universities.hipolabs.com/search?name=${q}&limit=10`
+      `${API}/resume/build/unis?name=${q}`
+      // `https://universities.hipolabs.com/search?name=${q}&limit=10`
     );
     const data = await res.json();
     console.log(data);

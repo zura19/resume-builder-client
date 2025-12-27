@@ -72,8 +72,8 @@ export default function UniversityField({ university, setUniversity }: props) {
                 <Spinner className="size-5 animate-spin" />
               </div>
             )}
-            {data?.length !== 0 ? (
-              data?.map((u) => (
+            {data?.data.universities?.length !== 0 ? (
+              data?.data.universities?.map((u) => (
                 <div
                   onClick={() => {
                     setUniversity(u.name);
