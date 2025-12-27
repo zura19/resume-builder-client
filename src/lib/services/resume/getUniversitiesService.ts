@@ -9,7 +9,7 @@ interface res {
 export async function getUniversities(q: string): Promise<res[]> {
   try {
     const res = await fetch(
-      `http://universities.hipolabs.com/search?name=${q}&limit=10`
+      `https://universities.hipolabs.com/search?name=${q}&limit=10`
     );
     const data = await res.json();
     console.log(data);
