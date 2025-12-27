@@ -44,6 +44,12 @@ export default function ExperienceStep() {
 
   const dissableAdd = !company || !position || !startDate || !endDate;
 
+  function disable(): boolean {
+    if (data.experience.length === 0) return true;
+    if (company || position || description) return true;
+    return false;
+  }
+
   return (
     <StepHeading
       heading="Experience"
@@ -161,7 +167,8 @@ export default function ExperienceStep() {
       </div>
       <div className="mt-auto">
         <StepFooter
-          disabledNext={data.experience.length === 0}
+          disabledNext={disable()}
+          // disabledNext={data.experience.length === 0}
           handleNext={nextStep}
         />
       </div>
