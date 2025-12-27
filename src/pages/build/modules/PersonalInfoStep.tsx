@@ -73,7 +73,7 @@ export default function PersonalInfoStep() {
           </div>
 
           <div className="mt-auto py-2">
-            <StepFooter />
+            <StepFooter disabledNext={!form.formState.isValid} />
           </div>
         </form>
       </Form>

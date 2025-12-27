@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/shared/DatePicker";
 import type { Education } from "@/lib/types/buildResumeTypes";
 import StepModal from "../components/StepModal";
+import UniversityField from "../components/UniversityField";
 
 export default function EducationStep() {
   const { nextStep, handleAddEducation, data } = useBuildResume();
@@ -45,6 +46,12 @@ export default function EducationStep() {
   const dissableAdd =
     !university || !degree || !fieldOfStudy || !startDate || !endDate;
 
+  function disable(): boolean {
+    if (data.education.length === 0) return true;
+    if (university || degree || fieldOfStudy) return true;
+    return false;
+  }
+
   return (
     <StepHeading
       heading="Education"
@@ -65,7 +72,12 @@ export default function EducationStep() {
             </Button>
           </div>
 
-          <div className="space-y-2">
+          <UniversityField
+            university={university}
+            setUniversity={setUniversity}
+          />
+
+          {/* <div className="space-y-2">
             <Label htmlFor="university" className="font-semibold">
               University
             </Label>
@@ -76,7 +88,7 @@ export default function EducationStep() {
               id="university"
               placeholder="University Name"
             />
-          </div>
+          </div> */}
 
           <div className="space-y-2">
             <Label htmlFor="fieldOfStudy" className="font-semibold">
@@ -156,7 +168,8 @@ export default function EducationStep() {
       </div>
       <div className="mt-auto">
         <StepFooter
-          disabledNext={data.education.length === 0}
+          disabledNext={disable()}
+          // disabledNext={data.education.length === 0}
           handleNext={nextStep}
         />
       </div>

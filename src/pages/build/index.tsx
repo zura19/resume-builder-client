@@ -11,7 +11,7 @@ import { canGenerateService } from "@/lib/services/resume/canGenerateService";
 import BuildSeketon from "./components/BuildSeketon";
 
 export default function BuildResume() {
-  const { step, data } = useBuildResume();
+  const { step } = useBuildResume();
   const {
     data: can,
     isLoading,
@@ -23,8 +23,6 @@ export default function BuildResume() {
     staleTime: 5 * 60 * 1000, // 5 minutes
     enabled: step === 1,
   });
-  console.log(isLoading);
-  console.log(data);
 
   function returnStep() {
     switch (step) {
